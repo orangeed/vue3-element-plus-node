@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { PersonModule } from './person/person.module';
+import { MsgModule } from './msg/msg.module';
 
 @Module({
   imports: [
@@ -12,13 +13,16 @@ import { PersonModule } from './person/person.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'jixin',
+      // password: 'jixin', //公司电脑数据库密码
+      password: '123456', //自己电脑数据库密码 
       database: 'addressbook',
-      entities: [],
       synchronize: true,
+      entities: [__dirname + '/**/*.entity.{js,ts}']
     }),
     UserModule,
     PersonModule,
+    MsgModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],

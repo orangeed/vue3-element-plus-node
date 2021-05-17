@@ -26,3 +26,11 @@ export class UpdatePersonDto {
     @ApiProperty({ description: '用户年龄', example: 23 })
     age: number
 }
+
+// 登陆
+export class userLoginDto {
+    @IsNotEmpty()
+    readonly username: string
+    @IsNotEmpty()
+    readonly password: string
+}
