@@ -1,18 +1,21 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
+
+
 @Injectable()
 export class MsgService {
-    public fail(reason: string, code?: number) {
-        if (code) {
-            throw new HttpException({ message: reason }, code);
-        } else {
-            throw new HttpException({ message: reason }, HttpStatus.BAD_REQUEST);
-        }
+    public fail(msg: any) {
+        console.log('msg', msg);
+        if (msg.errorCode) {
+            return { ...msg }
+        } 
+        // else {
+        //     throw new HttpException({ message: msg.message }, HttpStatus.BAD_REQUEST);
+        // }
     }
-    public pass(msg: string, dat: any) {
-        if (!msg) msg = "OK";
+    public pass(msg: any, dat: any) {
         if (!dat) dat = {};
-
-        return { data: dat, message: msg };
+        console.log(dat);
+        return { data: dat, message: msg.message, errorCode: msg.errorCode };
     }
 }

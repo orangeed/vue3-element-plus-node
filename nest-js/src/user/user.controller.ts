@@ -3,6 +3,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { userLoginDto } from 'src/class/class';
 import { UserService } from './user.service';
 import { MsgService } from '../msg/msg.service'
+import { success, loginErr } from '../utils/state'
 
 
 @Controller('user')
@@ -14,14 +15,14 @@ export class UserController {
     async login(@Body() loginUser: userLoginDto) {
         console.log('loginUser', loginUser);
         const _user = await this.userService.findOne(loginUser)
-        console.log('_user',_user);
-        
-        if (_user) this.MSG.fail('no user')
+        console.log('_user', _user);
+
+        if (!_user) return this.MSG.fail(loginErr)
         const token = await this.userService.generateJWT(_user);
-        const { username } = _user;
-        const user = { token, username };
-        console.log('result',user);
-        return { user }
+        const user = { token };
+        // console.log('result', user);
+        // return { user }
+        return this.MSG.pass(success, user)
 
         // return this.userService.login()
     }

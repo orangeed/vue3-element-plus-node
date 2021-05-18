@@ -28,16 +28,20 @@ export class UserService {
         return null
     }
     async findOne({ username, password }: userLoginDto): Promise<UserEntity> {
-        console.log('username',username);
+        console.log('username', username);
         const user = await this.user.findOne({ username });
-        console.log('user',user);
+        console.log('user.password', user.password);
+        console.log('password', password);
         if (!user) {
             return null;
         }
-
-        if (await argon2.verify(user.password, password)) {
-            return user;
+        if (password === user.password) {
+            return user
         }
+
+        // if (await argon2.verify(user.password, password)) {
+        //     return user;
+        // }
 
         return null;
     }
