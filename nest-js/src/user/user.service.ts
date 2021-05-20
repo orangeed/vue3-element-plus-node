@@ -17,6 +17,7 @@ export class UserService {
     ) { }
     async login({ username, password }: userLoginDto): Promise<UserEntity> {
         console.log('this.user', this.user);
+        // 通过SQL语句查询username
         const user = await this.user.findOne({ username });
         // console.log('user', user);
         if (!user) {
@@ -45,7 +46,15 @@ export class UserService {
 
         return null;
     }
-    getUserInfo() {
+    async getUserInfo(username: string) {
+        console.log('username',username);
+        // 通过SQL语句查询username
+        const userInfo = await this.user.findOne({username})
+        console.log('userInfo',userInfo);
+
+
+
+
         return {
             success: true,
             data: {
