@@ -19,7 +19,7 @@
           prefix-icon="el-icon-lock"
         ></el-input>
       </el-form-item>
-      <el-form-item prop="verify">
+      <!-- <el-form-item prop="verify">
         <el-input
           maxlength="2"
           onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
@@ -27,7 +27,7 @@
           placeholder="请输入验证码"
         ></el-input>
         <span class="verify" title="刷新" v-html="ruleForm.svg" @click.prevent="refreshVerify"></span>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" @click.prevent="onBehavior">{{ tipsFalse }}</el-button>
         <el-button @click="resetForm">重置</el-button>

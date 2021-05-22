@@ -1,15 +1,18 @@
 import { AxiosRequestConfig } from "axios"
 import { excludeProps } from "./utils"
+import { storageSession } from "/@/utils/storage"
 /**
  * 默认配置
  */
 export const defaultConfig: AxiosRequestConfig = {
-  baseURL: '/api',
+  // baseURL: '/api',
+  baseURL: 'http://127.0.0.1:5000/',
   timeout: 10000, //10秒超时
   headers: {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
-    "X-Requested-With": "XMLHttpRequest"
+    "X-Requested-With": "XMLHttpRequest",
+
   },
 }
 

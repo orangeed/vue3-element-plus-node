@@ -6,6 +6,7 @@ import { storageSession } from "../utils/storage";
 
 import { i18n } from "/@/plugins/i18n/index";
 
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -30,6 +31,44 @@ const routes: Array<RouteRecordRaw> = [
       showLink: true,
       savedPosition: false,
     },
+  },
+  {
+    path: "/article",
+    name: "article",
+    component: Layout,
+    redirect: "/article/index",
+    meta: {
+      icon: "el-icon-set-up",
+      title: "message.hsArticleManagement",
+      showLink: true,
+      savedPosition: true,
+    },
+    children: [
+      {
+        path: "/article/index",
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "../views/article/index.vue"
+          ),
+        meta: {
+          title: "message.hsArticle",
+          showLink: false,
+          savedPosition: true,
+        },
+      },
+      {
+        path: "/article/edit",
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "../views/article/edit.vue"
+          ),
+        meta: {
+          title: "message.hsArticleEdit",
+          showLink: false,
+          savedPosition: true,
+        },
+      },
+    ],
   },
   {
     path: "/components",
@@ -61,18 +100,18 @@ const routes: Array<RouteRecordRaw> = [
           savedPosition: true,
         },
       },
-      {
-        path: "/components/draggable",
-        component: () =>
-          import(
-            /* webpackChunkName: "components" */ "../views/components/draggable/index.vue"
-          ),
-        meta: {
-          title: "message.hsdraggable",
-          showLink: false,
-          savedPosition: true,
-        },
-      },
+      // {
+      //   path: "/components/draggable",
+      //   component: () =>
+      //     import(
+      //       /* webpackChunkName: "components" */ "../views/components/draggable/index.vue"
+      //     ),
+      //   meta: {
+      //     title: "message.hsdraggable",
+      //     showLink: false,
+      //     savedPosition: true,
+      //   },
+      // },
       {
         path: "/components/split-pane",
         component: () =>
@@ -352,6 +391,8 @@ const router = createRouter({
 
 import NProgress from "../utils/progress";
 
+import { getUserInfo } from '/@/api/login'
+
 const whiteList = ["/login", "/register"];
 
 router.beforeEach((to, _from, next) => {
@@ -359,9 +400,47 @@ router.beforeEach((to, _from, next) => {
   const { t } = i18n.global;
   // @ts-ignore
   to.meta.title ? (document.title = t(to.meta.title)) : ""; // 动态title
-  whiteList.indexOf(to.path) !== -1 || storageSession.getItem("info")
-    ? next()
-    : next("/login"); // 全部重定向到登录页
+  console.log('_from.query.redirect', _from.query.redirect);
+  if (storageSession.getItem('token')) {
+    console.log('有token');
+    if (to.path === '/login') {
+      next('/welcome')
+    } else {
+      console.log('没有info');
+      console.log('storageSession.getItem', storageSession.getItem('info'));
+      if (!storageSession.getItem('info')) {
+        setTimeout(() => {
+          getUserInfo().then(res => {
+            if (res.errorCode === 0) {
+              let userInfo = res.data
+              userInfo.token = storageSession.getItem('token')
+              storageSession.setItem('info', userInfo)
+              const toRedirect = decodeURIComponent(to.path)
+              console.log('toRedirect', toRedirect);
+              next({
+                path: toRedirect
+              })
+            }
+          })
+        })
+
+      }
+    }
+    next()
+  } else {
+    console.log('没有token');
+    console.log('to', to);
+    console.log('whiteList.indexOf(to.path)', whiteList.indexOf(to.path));
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next('/login')
+    }
+    // whiteList.indexOf(to.path)!==-1
+  }
+  // whiteList.indexOf(to.path) !== -1 || storageSession.getItem("token")
+  //   ? next()
+  //   : next("/login"); // 全部重定向到登录页
 });
 
 router.afterEach(() => {

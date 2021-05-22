@@ -20,19 +20,22 @@
       >
         <img :src="langs ? ch : en" />
       </div>
-      <i class="el-icon-setting hsset" :title="$t('message.hssystemSet')" @click="onPanel"></i>
+      <i
+        class="el-icon-setting hsset"
+        :title="$t('message.hssystemSet')"
+        @click="onPanel"
+      ></i>
       <!-- 退出登陆 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
           <img :src="favicon" />
-          <p>{{ usename }}</p>
+          <p>{{ username }}</p>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item
-              icon="el-icon-switch-button"
-              @click="logout"
-            >{{ $t("message.hsLoginOut") }}</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-switch-button" @click="logout">{{
+              $t("message.hsLoginOut")
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -55,6 +58,8 @@ import favicon from "/favicon.ico";
 import { emitter } from "/@/utils/mitt";
 import { deviceDetection } from "/@/utils/deviceDetection";
 import { useI18n } from "vue-i18n";
+import { logoutInfo } from "/@/api/login";
+import { successMessage, errorMessage } from "/@/utils/message";
 
 import ElementLocale from "element-plus/lib/locale";
 import enLocale from "element-plus/lib/locale/lang/en";
@@ -65,7 +70,7 @@ export default defineComponent({
   components: {
     Breadcrumb,
     Hamburger,
-    screenfull
+    screenfull,
   },
   setup() {
     let langs = ref(true);
@@ -73,8 +78,8 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
-
-    let usename = storageSession.getItem("info").username;
+    let username: string = "admin"; //默认一个username
+    username = store.getters.username;
 
     const { locale, t } = useI18n();
 
@@ -92,16 +97,37 @@ export default defineComponent({
 
     watch(
       () => langs.value,
-      val => {
+      (val) => {
+        console.log("val", val);
         //@ts-ignore
         document.title = t(unref(route.meta.title)); // 动态title
       }
     );
 
     // 退出登录
-    const logout = (): void => {
-      storageSession.removeItem("info");
-      router.push("/login");
+    const logout = async () => {
+      logoutInfo()
+        .then((res) => {
+          if (res.errorCode === 0) {
+            storageSession.removeItem("token");
+            storageSession.removeItem("info");
+            successMessage("退出成功！");
+            router.push("/login");
+          } else {
+            errorMessage(res.message);
+          }
+        })
+        .catch((error) => {
+          errorMessage(error.message);
+        });
+
+      // const logoutInfo = await logout();
+      // if (logout.errorCode === 0) {
+      //   storageSession.removeItem("token");
+      //   storageSession.removeItem("info");
+      //   successMessage("退出成功！");
+      //   router.push("/login");
+      // }
     };
 
     function onPanel() {
@@ -124,7 +150,7 @@ export default defineComponent({
         store.dispatch("app/toggleSideBar");
       },
       langs,
-      usename,
+      username,
       toggleLang,
       logout,
       ch,
@@ -133,9 +159,9 @@ export default defineComponent({
       onPanel,
       deviceDetection,
       locale,
-      t
+      t,
     };
-  }
+  },
 });
 </script>
 

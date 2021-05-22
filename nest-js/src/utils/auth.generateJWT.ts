@@ -15,8 +15,9 @@ export class AuthMiddleware implements NestMiddleware {
         private readonly MSG: MsgService) { }
 
     async use(req: Request, res: Response, next: NextFunction) {
-        const Access_Token = req.headers.access_token;
-        // console.log('req', req.headers);
+        const Access_Token = req.headers['access-token'];
+        console.log('req', req.headers);
+        console.log('Access_Token',Access_Token);
         if (Access_Token) {
             const token = Access_Token.toString();
 
@@ -40,7 +41,8 @@ export class AuthMiddleware implements NestMiddleware {
             // decoded = jwt.verify(token, SECRET);
             decoded = jwt.verify(token, 'orange');
         } catch (e) {
-            this.MSG.fail(tokenErr)
+            throw new HttpException('token错误', HttpStatus.NOT_FOUND)
+            //    this.MSG.fail(tokenErr)
         }
         return decoded
     }

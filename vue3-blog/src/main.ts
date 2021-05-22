@@ -20,6 +20,7 @@ import axios from "axios";
 
 const app = createApp(App);
 app.config.globalProperties.$config = getConfig();
+app.config.globalProperties.$store = store
 
 // 获取项目动态全局配置
 export const getServerConfig = async (): Promise<any> => {

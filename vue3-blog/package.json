@@ -1,6 +1,6 @@
 {
-  "name": "vue-pure-admin",
-  "version": "2.0.0",
+  "name": "orange-admin",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env --max_old_space_size=4096 vite",
@@ -23,6 +23,8 @@
     "element-plus": "^1.0.2-beta.42",
     "font-awesome": "^4.7.0",
     "lodash-es": "^4.17.21",
+    "mavon-editor": "^2.9.1",
+    "md5": "^2.3.0",
     "mitt": "^2.1.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",

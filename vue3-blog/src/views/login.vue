@@ -9,12 +9,16 @@
 </template>
 
 <script lang="ts">
-import { reactive, onBeforeMount } from "vue";
+import { useStore } from "vuex";
+import { reactive, onBeforeMount, getCurrentInstance } from "vue";
 import info, { ContextProps } from "../components/info/index.vue";
-import { getVerify, getLogin } from "/@/api/user";
+// import { getVerify, getLogin } from "/@/api/user";
+import { login, getUserInfo } from "/@/api/login";
 import { useRouter } from "vue-router";
 import { storageSession } from "/@/utils/storage";
-import { warnMessage, successMessage } from "/@/utils/message";
+import { warnMessage, successMessage, errorMessage } from "/@/utils/message";
+import MD5 from "md5";
+
 export default {
   name: "login",
   components: {
@@ -22,6 +26,8 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const { proxy }: any = getCurrentInstance();
+    const { dispatch, getters } = useStore();
 
     // 刷新验证码
     const refreshGetVerify = async () => {
@@ -30,8 +36,8 @@ export default {
     };
 
     const contextInfo: ContextProps = reactive({
-      userName: "",
-      passWord: "",
+      userName: "orange",
+      passWord: "111111",
       verify: null,
       svg: null,
     });
@@ -43,24 +49,18 @@ export default {
 
     // 登录
     const onLogin = async () => {
-      storageSession.setItem("info", {
-        username: "orange",
-        accessToken: "eyJhbGciOiJIUzUxMiJ9.test",
+      const loginInfo = await login({
+        username: contextInfo.userName,
+        password: MD5(contextInfo.passWord),
       });
-      router.push("/");
-      // let { userName, passWord, verify } = contextInfo;
-      // let { code, info, accessToken } = await getLogin({
-      //   username: userName,
-      //   password: passWord,
-      //   verify: verify,
-      // });
-      // code === 0
-      //   ? successMessage(info) &&
-      //     toPage({
-      //       username: userName,
-      //       accessToken,
-      //     })
-      //   : warnMessage(info);
+      if (loginInfo.errorCode === 0) {
+        storageSession.setItem("token", loginInfo.data.token);
+        dispatch("app/saveUserName", contextInfo.userName);
+        router.push("/welcome");
+        successMessage("登录成功！");
+      } else {
+        errorMessage(loginInfo.message);
+      }
     };
 
     const refreshVerify = (): void => {

@@ -12,10 +12,11 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
-  await app.listen(5000);
+  app.enableCors()
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+  await app.listen(5000);
 }
 bootstrap();

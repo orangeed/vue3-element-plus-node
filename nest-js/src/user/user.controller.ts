@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { userLoginDto } from 'src/class/class';
 import { UserService } from './user.service';
 import { MsgService } from '../msg/msg.service'
-import { success, loginErr } from '../utils/state'
+import { success, loginErr, userInfoErr } from '../utils/state'
 
 @Controller('user')
 @ApiTags('用户登录')
@@ -15,7 +15,7 @@ export class UserController {
     async login(@Body() loginUser: userLoginDto) {
         console.log('loginUser', loginUser);
         this.loginUserName = loginUser.username
-        const _user = await this.userService.findOne(loginUser)
+        const _user = await this.userService.login(loginUser)
         console.log('_user', _user);
 
         if (!_user) return this.MSG.fail(loginErr)
@@ -30,8 +30,16 @@ export class UserController {
 
     @Get('/userInfo')
     @ApiOperation({ summary: '获取用户登录信息' })
-    getUserInfo() {
+    async getUserInfo() {
         const loginUserName = this.loginUserName
-        return this.userService.getUserInfo(loginUserName)
+        const userInfo = await this.userService.getUserInfo(loginUserName)
+        if (!userInfo) return this.MSG.fail(userInfoErr)
+        return this.MSG.pass(success, userInfo)
+    }
+    @Delete('/logout')
+    @ApiOperation({ summary: '用户退出登录' })
+    async logout() {
+        const logout = '退成成功！'
+        return this.MSG.pass(success, logout)
     }
 }

@@ -15,24 +15,25 @@ export class UserService {
         private readonly user: Repository<UserEntity>,
         private readonly MSG: MsgService
     ) { }
+    // async login({ username, password }: userLoginDto): Promise<UserEntity> {
+    //     console.log('this.user', this.user);
+    //     // 通过SQL语句查询username
+    //     const user = await this.user.findOne({ username });
+    //     // console.log('user', user);
+    //     if (!user) {
+    //         return null
+    //     }
+    //     if (await argon2.verify(user.password, password)) {
+    //         return user
+    //     }
+    //     return null
+    // }
     async login({ username, password }: userLoginDto): Promise<UserEntity> {
-        console.log('this.user', this.user);
-        // 通过SQL语句查询username
-        const user = await this.user.findOne({ username });
-        // console.log('user', user);
-        if (!user) {
-            return null
-        }
-        if (await argon2.verify(user.password, password)) {
-            return user
-        }
-        return null
-    }
-    async findOne({ username, password }: userLoginDto): Promise<UserEntity> {
         console.log('username', username);
         const user = await this.user.findOne({ username });
-        console.log('user.password', user.password);
-        console.log('password', password);
+        console.log('user',user);
+        // console.log('user.password', user.password);
+        // console.log('password', password);
         if (!user) {
             return null;
         }
@@ -47,23 +48,17 @@ export class UserService {
         return null;
     }
     async getUserInfo(username: string) {
-        console.log('username',username);
+        console.log('username', username);
         // 通过SQL语句查询username
-        const userInfo = await this.user.findOne({username})
-        console.log('userInfo',userInfo);
+        const userInfo = await this.user.findOne({ username })
+        console.log('userInfo', userInfo);
+        if (!userInfo) return null
+        return userInfo
 
 
 
 
-        return {
-            success: true,
-            data: {
-                id: 1,
-                username: 'orange',
-                age: 25,
-                role: '管理员'
-            }
-        }
+
     }
     async findById(id: number) {
         const user = await this.user.findOne(id);

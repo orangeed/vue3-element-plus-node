@@ -4,7 +4,8 @@ interface stateInter {
     opened: Boolean,
     withoutAnimation: Boolean
   },
-  device: String
+  device: String,
+  [propname: string]: any,
 }
 
 const state = {
@@ -12,14 +13,15 @@ const state = {
     opened: storageLocal.getItem('sidebarStatus') ? !!+storageLocal.getItem('sidebarStatus') : true,
     withoutAnimation: false
   },
-  device: 'desktop'
+  device: 'desktop',
+  username: 'admin'
 }
 
 const mutations = {
   TOGGLE_SIDEBAR: (state: stateInter): void => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
-     if (state.sidebar.opened) {
+    if (state.sidebar.opened) {
       storageLocal.setItem('sidebarStatus', 1)
     } else {
       storageLocal.setItem('sidebarStatus', 0)
@@ -32,6 +34,9 @@ const mutations = {
   },
   TOGGLE_DEVICE: (state: stateInter, device: String) => {
     state.device = device
+  },
+  SAVE_USERNAME: (state: stateInter, username: string) => {
+    state.username = username
   }
 }
 
@@ -47,6 +52,9 @@ const actions = {
   // @ts-ignore
   toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
+  },
+  saveUserName({ commit }, username) {
+    commit('SAVE_USERNAME', username)
   }
 }
 

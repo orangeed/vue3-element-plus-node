@@ -31,7 +31,7 @@ import Flop from "/@/components/Flop";
 import { ref, computed, onMounted, nextTick } from "vue";
 import { deviceDetection } from "/@/utils/deviceDetection";
 import { useEventListener, tryOnUnmounted, useTimeoutFn } from "@vueuse/core";
-import { echartsJson } from "/@/api/mock";
+// import { echartsJson } from "/@/api/mock";
 import echarts from "/@/plugins/echarts";
 
 let brokenLine: any = null; //折线图实例
@@ -68,110 +68,110 @@ export default {
       brokenLine = echarts.init(lineRefDom);
       brokenLine.clear(); //清除旧画布 重新渲染
 
-      echartsJson().then(({ info }) => {
-        brokenLine.setOption({
-          title: {
-            text: "上海 空气质量指数",
-            left: "1%"
-          },
-          tooltip: {
-            trigger: "axis"
-          },
-          grid: {
-            left: "5%",
-            right: "15%",
-            bottom: "10%"
-          },
-          xAxis: {
-            data: info.map(function(item) {
-              return item[0];
-            })
-          },
-          yAxis: {},
-          toolbox: {
-            right: 10,
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          dataZoom: [
-            {
-              startValue: "2014-06-01"
-            },
-            {
-              type: "inside"
-            }
-          ],
-          visualMap: {
-            top: 50,
-            right: 10,
-            pieces: [
-              {
-                gt: 0,
-                lte: 50,
-                color: "#93CE07"
-              },
-              {
-                gt: 50,
-                lte: 100,
-                color: "#FBDB0F"
-              },
-              {
-                gt: 100,
-                lte: 150,
-                color: "#FC7D02"
-              },
-              {
-                gt: 150,
-                lte: 200,
-                color: "#FD0100"
-              },
-              {
-                gt: 200,
-                lte: 300,
-                color: "#AA069F"
-              },
-              {
-                gt: 300,
-                color: "#AC3B2A"
-              }
-            ],
-            outOfRange: {
-              color: "#999"
-            }
-          },
-          series: {
-            name: "上海 空气质量指数",
-            type: "line",
-            data: info.map(function(item) {
-              return item[1];
-            }),
-            markLine: {
-              silent: true,
-              lineStyle: {
-                color: "#333"
-              },
-              data: [
-                {
-                  yAxis: 50
-                },
-                {
-                  yAxis: 100
-                },
-                {
-                  yAxis: 150
-                },
-                {
-                  yAxis: 200
-                },
-                {
-                  yAxis: 300
-                }
-              ]
-            }
-          }
-        });
-      });
+      // echartsJson().then(({ info }) => {
+      //   brokenLine.setOption({
+      //     title: {
+      //       text: "上海 空气质量指数",
+      //       left: "1%"
+      //     },
+      //     tooltip: {
+      //       trigger: "axis"
+      //     },
+      //     grid: {
+      //       left: "5%",
+      //       right: "15%",
+      //       bottom: "10%"
+      //     },
+      //     xAxis: {
+      //       data: info.map(function(item) {
+      //         return item[0];
+      //       })
+      //     },
+      //     yAxis: {},
+      //     toolbox: {
+      //       right: 10,
+      //       feature: {
+      //         saveAsImage: {}
+      //       }
+      //     },
+      //     dataZoom: [
+      //       {
+      //         startValue: "2014-06-01"
+      //       },
+      //       {
+      //         type: "inside"
+      //       }
+      //     ],
+      //     visualMap: {
+      //       top: 50,
+      //       right: 10,
+      //       pieces: [
+      //         {
+      //           gt: 0,
+      //           lte: 50,
+      //           color: "#93CE07"
+      //         },
+      //         {
+      //           gt: 50,
+      //           lte: 100,
+      //           color: "#FBDB0F"
+      //         },
+      //         {
+      //           gt: 100,
+      //           lte: 150,
+      //           color: "#FC7D02"
+      //         },
+      //         {
+      //           gt: 150,
+      //           lte: 200,
+      //           color: "#FD0100"
+      //         },
+      //         {
+      //           gt: 200,
+      //           lte: 300,
+      //           color: "#AA069F"
+      //         },
+      //         {
+      //           gt: 300,
+      //           color: "#AC3B2A"
+      //         }
+      //       ],
+      //       outOfRange: {
+      //         color: "#999"
+      //       }
+      //     },
+      //     series: {
+      //       name: "上海 空气质量指数",
+      //       type: "line",
+      //       data: info.map(function(item) {
+      //         return item[1];
+      //       }),
+      //       markLine: {
+      //         silent: true,
+      //         lineStyle: {
+      //           color: "#333"
+      //         },
+      //         data: [
+      //           {
+      //             yAxis: 50
+      //           },
+      //           {
+      //             yAxis: 100
+      //           },
+      //           {
+      //             yAxis: 150
+      //           },
+      //           {
+      //             yAxis: 200
+      //           },
+      //           {
+      //             yAxis: 300
+      //           }
+      //         ]
+      //       }
+      //     }
+      //   });
+      // });
     }
 
     const openDepot = (): void => {

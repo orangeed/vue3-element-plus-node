@@ -12,6 +12,7 @@ import { genConfig } from "./config"
 
 import { transformConfigByMethod } from "./utils"
 
+
 import {
   cancelTokenType,
   RequestMethods,
@@ -19,6 +20,7 @@ import {
   EnclosureHttpResoponse,
   EnclosureHttpError
 } from "./types.d"
+import { storageSession } from "../storage"
 
 class EnclosureHttp {
   constructor() {
@@ -115,6 +117,10 @@ class EnclosureHttp {
   private httpInterceptorsRequest(): void {
     EnclosureHttp.axiosInstance.interceptors.request.use(
       (config: EnclosureHttpRequestConfig) => {
+        const token = storageSession.getItem('token')
+        if (token) {
+          config.headers['Access-Token'] = token
+        }
         const $config = config
         NProgress.start()   // 每次切换页面时，调用进度条
         const cancelKey = this.genUniqueKey($config)
@@ -150,7 +156,7 @@ class EnclosureHttp {
   }
 
   /**
-   * @description 拦截相应
+   * @description 拦截响应
    * @returns void 0
    */
   private httpInterceptorsResponse(): void {

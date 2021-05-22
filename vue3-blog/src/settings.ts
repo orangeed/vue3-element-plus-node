@@ -1,5 +1,5 @@
 export default {
-  title: "PureAdmin",
+  title: "橘子的分享",
 
   fixedHeader: false,
 

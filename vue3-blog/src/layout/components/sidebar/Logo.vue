@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-logo-container" :class="{'collapse':collapse}">
+  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
       <router-link
         v-if="collapse"
@@ -8,12 +8,25 @@
         class="sidebar-logo-link"
         to="/"
       >
-        <i class="fa fa-optin-monster"></i>
+        <!-- <i class="fa fa-optin-monster"></i> -->
+        <!-- <h1 class="sidebar-title">{{ settings.title }}</h1> -->
+        <div class="moble-logo">
+          <img src="../../../assets/logo.png" />
+        </div>
         <h1 class="sidebar-title">{{ settings.title }}</h1>
       </router-link>
-      <router-link v-else key="expand" :title="settings.title" class="sidebar-logo-link" to="/">
-        <i class="fa fa-optin-monster"></i>
-        <h1 class="sidebar-title">{{ settings.title }}</h1>
+      <router-link
+        v-else
+        key="expand"
+        :title="settings.title"
+        class="sidebar-logo-link"
+        to="/"
+      >
+        <!-- <i class="fa fa-optin-monster"></i> -->
+        <div class="logo">
+          <img src="../../../assets/logo.png" class="logo-img" />
+          <h1 class="sidebar-title">{{ settings.title }}</h1>
+        </div>
       </router-link>
     </transition>
   </div>
@@ -26,14 +39,14 @@ export default defineComponent({
   props: {
     collapse: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   setup() {
     return {
-      settings
+      settings,
     };
-  }
+  },
 });
 </script>
 
@@ -48,6 +61,7 @@ export default defineComponent({
 
   .sidebar-logo-link {
     height: 100%;
+    display: flex;
 
     .sidebar-title {
       display: inline-block;
@@ -59,10 +73,30 @@ export default defineComponent({
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
     }
 
-    .fa-optin-monster {
-      font-size: 38px;
-      color: #1890ff;
-      margin-top: 5px;
+    // .fa-optin-monster {
+    //   font-size: 38px;
+    //   color: #1890ff;
+    //   margin-top: 5px;
+    // }
+    .logo {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .logo-img {
+        width: 32px;
+        margin: 0 10px 0 0;
+      }
+    }
+    .moble-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 32px;
+        height: 32px;
+        margin: 0 12px;
+      }
     }
   }
 

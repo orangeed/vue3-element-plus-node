@@ -30,6 +30,9 @@ export const menusConfig = {
       hsflowChart: "流程图",
       hsseamless: "无缝滚动",
       hscontextmenu: "右键菜单",
+      hsArticleManagement: '文章管理',
+      hsArticle: '文章列表',
+      hsArticleEdit: '编辑文章'
     },
   },
   en: {
@@ -54,6 +57,9 @@ export const menusConfig = {
       hsflowChart: "Flow Chart",
       hsseamless: "Seamless Scroll",
       hscontextmenu: "Context Menu",
+      hsArticleManagement: "Article management",
+      hsArticle: 'Article list',
+      hsArticleEdit: 'Edit article'
     },
   },
 };
