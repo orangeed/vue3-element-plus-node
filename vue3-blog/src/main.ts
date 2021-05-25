@@ -13,7 +13,12 @@ import "./style/index.scss";
 import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
 
-import "v-contextmenu/dist/themes/default.css";
+import VueMarkdownEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
+import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
+
+VueMarkdownEditor.use(vuepressTheme);
 
 import { setConfig, getConfig } from "./config";
 import axios from "axios";
@@ -55,6 +60,7 @@ getServerConfig().then(() => {
     .use(router)
     .use(store)
     .use(useElementPlus)
+    .use(VueMarkdownEditor)
     .use(useTable)
     .use(usI18n)
     .mount("#app");

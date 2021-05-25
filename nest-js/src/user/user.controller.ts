@@ -32,9 +32,9 @@ export class UserController {
     @ApiOperation({ summary: '获取用户登录信息' })
     async getUserInfo() {
         const loginUserName = this.loginUserName
-        const userInfo = await this.userService.getUserInfo(loginUserName)
-        if (!userInfo) return this.MSG.fail(userInfoErr)
-        return this.MSG.pass(success, userInfo)
+        const _userInfo = await this.userService.getUserInfo(loginUserName)
+        if (!_userInfo) return this.MSG.fail(userInfoErr)
+        return this.MSG.pass(success, _userInfo)
     }
     @Delete('/logout')
     @ApiOperation({ summary: '用户退出登录' })

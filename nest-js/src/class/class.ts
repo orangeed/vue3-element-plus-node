@@ -34,3 +34,40 @@ export class userLoginDto {
     @IsNotEmpty()
     readonly password: string
 }
+
+// 文章信息
+export class articleInfoDto {
+    @ApiProperty({ description: '文章标题', example: '这个是第一篇文章' })
+    @IsNotEmpty({ message: '文字标题不能为空' })
+    readonly title: string
+
+    @ApiProperty({ description: '文章简介', example: '这个是文章简介' })
+    @IsNotEmpty({ message: '文章简介不能为空' })
+    readonly description: string
+
+    @ApiProperty({ description: '文章内容', example: '这个是文章内容' })
+    @IsNotEmpty({ message: '文章内容不能为空' })
+    readonly content: string
+
+    @ApiProperty({ description: '文章的创建时间', example: '2021-05-24' })
+    @IsNotEmpty({ message: '文章创建时间不能为空' })
+    readonly createTime: string
+
+    @ApiProperty({ description: '文章的修改时间', example: '2021-05-24' })
+    readonly changeTime: string
+
+    @ApiProperty({ description: '文章的状态', example: '1显示，2不显示' })
+    @IsNotEmpty({ message: '文章状态不能为空' })
+    readonly state: number
+}
+
+// 文章列表
+export class articleListDto {
+    @ApiProperty({ description: '分页数量，每页显示多少条数据' })
+    @IsNotEmpty({ message: '分页数量不能为空' })
+    readonly pageSize: number
+
+    @ApiProperty({ description: '当前所处第几页' })
+    @IsNotEmpty({ message: '当前页数不能为空' })
+    readonly currentPage: number
+}

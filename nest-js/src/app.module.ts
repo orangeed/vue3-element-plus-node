@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { PersonModule } from './person/person.module';
 import { MsgModule } from './msg/msg.module';
 import { AuthMiddleware } from './utils/auth.generateJWT';
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthMiddleware } from './utils/auth.generateJWT';
     UserModule,
     PersonModule,
     MsgModule,
+    ArticleModule,
 
   ],
   controllers: [AppController],

@@ -30,3 +30,13 @@ export const userInfoErr = {
     errorCode: 101,
     message: '获取登录用户信息失败'
 }
+
+export const articleCreateErr = {
+    errorCode: 102,
+    message: '新增文章失败'
+}
+
+export const getArticleListErr = {
+    errorCode: 103,
+    message: '获取文章列表失败'
+}

@@ -1,84 +1,61 @@
 <!-- markdown编辑 -->
 <template>
-  <div>
-    <mavon-editor
-      :toolbars="createData.toolbars"
-      @imgAdd="handleEditorImgAdd"
-      @imgDel="handleEditorImgDel"
-      style="height: 600px"
-      v-model="markDownValue"
-      @change="handleChange"
-      ref="md"
-    />
-    <!-- {{ createData.obj.aaa }} -->
+  <v-md-editor v-model="text" height="90%"></v-md-editor>
+  <div class="btn-group">
+    <el-button type="primary" @click="handleSave" class="btn-save"
+      >保存</el-button
+    >
   </div>
 </template>
  
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import mavonEditor from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
+import { defineComponent, ref } from "vue";
+import "@kangc/v-md-editor/lib/style/preview.css";
+import { createArticle } from "/@/api/article";
+import { warnMessage, successMessage, errorMessage } from "/@/utils/message";
 
 export default defineComponent({
-  components: { mavonEditor },
+  name: "edit",
   setup() {
-    const createData = reactive({
-      toolbars: {
-        bold: true, // 粗体
-        italic: true, // 斜体
-        header: true, // 标题
-        underline: true, // 下划线
-        strikethrough: true, // 中划线
-        mark: true, // 标记
-        superscript: true, // 上角标
-        subscript: true, // 下角标
-        quote: true, // 引用
-        ol: true, // 有序列表
-        ul: true, // 无序列表
-        link: true, // 链接
-        imagelink: true, // 图片链接
-        code: false, // code
-        table: true, // 表格
-        fullscreen: true, // 全屏编辑
-        readmodel: true, // 沉浸式阅读
-        htmlcode: true, // 展示html源码
-        help: true, // 帮助
-        /* 1.3.5 */
-        undo: true, // 上一步
-        redo: true, // 下一步
-        trash: true, // 清空
-        save: true, // 保存（触发events中的save事件）
-        /* 1.4.2 */
-        navigation: true, // 导航目录
-        /* 2.1.8 */
-        alignleft: true, // 左对齐
-        aligncenter: true, // 居中
-        alignright: true, // 右对齐
-        /* 2.2.1 */
-        subfield: true, // 单双栏模式
-        preview: true, // 预览
-      },
-      markDownValue: "",
-    });
-    // 添加图片
-    const handleEditorImgAdd = () => {
-      console.log("添加图片");
+    const text = ref("");
+    const handleSave = () => {
+      console.log("text", text);
+      const articleInfo = {
+        title: "这是一个文章标题",
+        description: "这是文章的简介",
+        content: "这是文章的内容",
+        createTime: "2021-05-21",
+        state: 2,
+      };
+      if (text) {
+        createArticle(articleInfo)
+          .then((res) => {
+            if (res.errorCode === 0) {
+              successMessage("文章保存成功！");
+            } else {
+              errorMessage(res.message);
+            }
+          })
+          .catch((error) => {
+            errorMessage(error.message);
+          });
+      } else {
+        warnMessage("请输入文章内容");
+      }
     };
-    // 删除图片
-    const handleEditorImgDel = () => {
-      console.log("删除图片");
-    };
-    // 改变时的函数
-    const handleChange = () => {
-      console.log("handleChange");
-    };
-    return {
-      createData,
-    };
+    return { text, handleSave };
   },
 });
 </script>
 
  
- <style>
+<style lang='scss'>
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  .btn-save {
+    width: 200px;
+  }
+}
 </style>

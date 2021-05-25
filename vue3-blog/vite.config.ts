@@ -23,6 +23,7 @@ const root: string = process.cwd();
 
 export default ({ command }: ConfigEnv): UserConfigExport => {
   let prodMock = true;
+
   return {
     /**
      * 基本公共路径
@@ -44,7 +45,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
        * @default 4000
        */
       // port: VITE_PORT,
-      port:4000,
+      port: 4000,
       // 本地跨域代理
       proxy: createProxy(VITE_PROXY),
     },

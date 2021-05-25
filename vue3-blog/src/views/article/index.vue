@@ -2,15 +2,134 @@
  * @Author: orange 
  * @Date: 2021-05-22 16:42:40 
  * @Last Modified by: orange
- * @Last Modified time: 2021-05-22 16:47:10
+ * @Last Modified time: 2021-05-25 17:01:21
  */
 <template>
-  <vxe-grid v-bind="gridOptions" style="width: 98%"></vxe-grid>
+  <div class="table">
+    <vxe-toolbar>
+      <template #buttons>
+        <vxe-input
+          v-model="tablePage.searchName"
+          placeholder="搜索文章标题"
+          style="width: 300px"
+        >
+          <template #prefix> <i class="fa fa-search"></i> </template
+        ></vxe-input>
+        <vxe-button icon="vxe-icon--search">搜索</vxe-button>
+        <vxe-button status="primary" icon="vxe-icon--plus">新增</vxe-button>
+      </template>
+    </vxe-toolbar>
+    <vxe-table
+      border
+      resizable
+      show-footer
+      :data="gridOptions.data"
+      style="height: 700px"
+    >
+      <vxe-column type="checkbox" width="60" align="center"></vxe-column>
+      <vxe-column type="seq" width="50" align="center"></vxe-column>
+      <vxe-column
+        field="title"
+        title="标题"
+        align="center"
+        width="200"
+      ></vxe-column>
+      <vxe-column
+        field="description"
+        title="文章简介"
+        align="center"
+      ></vxe-column>
+      <vxe-column
+        field="createTime"
+        title="创建时间"
+        align="center"
+        width="200"
+      ></vxe-column>
+      <vxe-column
+        field="changeTime"
+        title="修改时间"
+        align="center"
+        width="200"
+      ></vxe-column>
+      <vxe-column field="state" title="状态" align="center" width="100">
+        <template #default="{ row }">
+          <el-tag :type="row.state == 1 ? 'success' : 'info'" effect="dark">
+            {{ row.state === 1 ? "已发布" : "草稿" }}
+          </el-tag>
+        </template>
+      </vxe-column>
+      <vxe-column
+        field="operating"
+        title="操作"
+        align="center"
+        width="100"
+      >
+      <template>
+        
+      </template>
+      </vxe-column>
+    </vxe-table>
+    <vxe-pager
+      perfect
+      v-model:current-page="tablePage.currentPage"
+      v-model:page-size="tablePage.pageSize"
+      :total="tablePage.total"
+      :layouts="[
+        'PrevJump',
+        'PrevPage',
+        'Number',
+        'NextPage',
+        'NextJump',
+        'Sizes',
+        'FullJump',
+        'Total',
+      ]"
+    >
+    </vxe-pager>
+  </div>
+
+  <!-- <vxe-grid v-bind="gridOptions" class="table">
+    <template #buttons>
+      <vxe-input
+        v-model="tablePage.searchName"
+        placeholder="搜索文章标题"
+        style="width: 300px"
+      >
+        <template #prefix> <i class="fa fa-search"></i> </template
+      ></vxe-input>
+      <vxe-button icon="vxe-icon--search">搜索</vxe-button>
+      <vxe-button status="primary" icon="vxe-icon--plus">新增</vxe-button>
+    </template>
+    <template #pager>
+      <vxe-pager
+        :layouts="[
+          'Sizes',
+          'PrevJump',
+          'PrevPage',
+          'Number',
+          'NextPage',
+          'NextJump',
+          'FullJump',
+          'Total',
+        ]"
+        v-model:current-page="tablePage.currentPage"
+        v-model:page-size="tablePage.pageSize"
+        :total="tablePage.total"
+        @page-change="handlePageChange"
+      >
+      </vxe-pager>
+    </template>
+    <template #num_footer>
+      <vxe-button status="primary" icon="vxe-icon--plus">新增</vxe-button>
+    </template>
+  </vxe-grid> -->
 </template>
 
 <script lang='ts'>
 import { reactive } from "vue";
-import { VxeGridProps } from "vxe-table";
+import { VxeGridProps, VxePagerEvents } from "vxe-table";
+import { getArticleList } from "/@/api/article";
+import { successMessage, errorMessage } from "/@/utils/message";
 export default {
   name: "user",
   setup() {
@@ -18,48 +137,25 @@ export default {
       border: true,
       resizable: true,
       keepSource: true,
-      height: 500,
+      height: "100%",
+      loading: false,
+      align: "center",
       printConfig: {},
       importConfig: {},
       exportConfig: {},
-      pagerConfig: {
-        perfect: true,
-        pageSize: 15,
-      },
-      editConfig: {
-        trigger: "click",
-        mode: "row",
-        showStatus: true,
-      },
       toolbarConfig: {
-        buttons: [
-          {
-            code: "insert_actived",
-            name: "message.hsadd",
-            status: "perfect",
-            icon: "fa fa-plus",
-          },
-          {
-            code: "mark_cancel",
-            name: "message.hsmark",
-            status: "perfect",
-            icon: "fa fa-trash-o",
-          },
-          {
-            code: "save",
-            name: "message.hssave",
-            status: "perfect",
-            icon: "fa fa-save",
-          },
-        ],
-        perfect: true,
-        refresh: {
-          icon: "fa fa-refresh",
-          iconLoading: "fa fa-spinner fa-spin",
+        custom: true,
+        slots: {
+          buttons: "buttons",
+          default: "operating",
         },
-        import: {
-          icon: "fa fa-upload",
-        },
+        // refresh: {
+        //   icon: "fa fa-refresh",
+        //   iconLoading: "fa fa-spinner fa-spin",
+        // },
+        // import: {
+        //   icon: "fa fa-upload",
+        // },
         export: {
           icon: "fa fa-download",
         },
@@ -74,186 +170,72 @@ export default {
           icon: "fa fa-cog",
         },
       },
-      proxyConfig: {
-        props: {
-          result: "result",
-          total: "page.total",
-        },
-        ajax: {
-          // 接收 Promise
-          query: ({ page }) => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                const list = [
-                  {
-                    id: 10001,
-                    name: "Test1",
-                    nickname: "T1",
-                    role: "Develop",
-                    sex: "Man",
-                    age: 28,
-                    address: "Shenzhen",
-                  },
-                  {
-                    id: 10002,
-                    name: "Test2",
-                    nickname: "T2",
-                    role: "Test",
-                    sex: "Women",
-                    age: 22,
-                    address: "Guangzhou",
-                  },
-                  {
-                    id: 10003,
-                    name: "Test3",
-                    nickname: "T3",
-                    role: "PM",
-                    sex: "Man",
-                    age: 32,
-                    address: "Shanghai",
-                  },
-                  {
-                    id: 10004,
-                    name: "Test4",
-                    nickname: "T4",
-                    role: "Designer",
-                    sex: "Women ",
-                    age: 23,
-                    address: "Shenzhen",
-                  },
-                  {
-                    id: 10005,
-                    name: "Test5",
-                    nickname: "T5",
-                    role: "Develop",
-                    sex: "Women ",
-                    age: 30,
-                    address: "Shanghai",
-                  },
-                  {
-                    id: 10006,
-                    name: "Test6",
-                    nickname: "T6",
-                    role: "Designer",
-                    sex: "Women ",
-                    age: 21,
-                    address: "Shenzhen",
-                  },
-                  {
-                    id: 10007,
-                    name: "Test7",
-                    nickname: "T7",
-                    role: "Test",
-                    sex: "Man ",
-                    age: 29,
-                    address: "vxe-table 从入门到放弃",
-                  },
-                  {
-                    id: 10008,
-                    name: "Test8",
-                    nickname: "T8",
-                    role: "Develop",
-                    sex: "Man ",
-                    age: 35,
-                    address: "Shenzhen",
-                  },
-                  {
-                    id: 10009,
-                    name: "Test9",
-                    nickname: "T9",
-                    role: "Develop",
-                    sex: "Man ",
-                    age: 35,
-                    address: "Shenzhen",
-                  },
-                  {
-                    id: 100010,
-                    name: "Test10",
-                    nickname: "T10",
-                    role: "Develop",
-                    sex: "Man ",
-                    age: 35,
-                    address: "Guangzhou",
-                  },
-                  {
-                    id: 100011,
-                    name: "Test11",
-                    nickname: "T11",
-                    role: "Test",
-                    sex: "Women ",
-                    age: 26,
-                    address: "vxe-table 从入门到放弃",
-                  },
-                  {
-                    id: 100012,
-                    name: "Test12",
-                    nickname: "T12",
-                    role: "Develop",
-                    sex: "Man ",
-                    age: 34,
-                    address: "Guangzhou",
-                  },
-                  {
-                    id: 100013,
-                    name: "Test13",
-                    nickname: "T13",
-                    role: "Test",
-                    sex: "Women ",
-                    age: 22,
-                    address: "Shenzhen",
-                  },
-                ];
-                resolve({
-                  page: {
-                    total: list.length,
-                  },
-                  result: list.slice(
-                    (page.currentPage - 1) * page.pageSize,
-                    page.currentPage * page.pageSize
-                  ),
-                });
-              }, 100);
-            });
-          },
-          // body 对象： { removeRecords }
-          delete: () => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({});
-              }, 100);
-            });
-          },
-          // body 对象： { insertRecords, updateRecords, removeRecords, pendingRecords }
-          save: () => {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({});
-              }, 100);
-            });
-          },
-        },
-      },
+      data: [],
       columns: [
         { type: "checkbox", width: 50 },
         { type: "seq", width: 60 },
-        { field: "name", title: "Name", editRender: { name: "input" } },
-        { field: "nickname", title: "Nickname", editRender: { name: "input" } },
-        { field: "role", title: "Role", editRender: { name: "input" } },
+        // { field: "title", title: "title", editRender: { name: "input" } },
+        { field: "title", title: "标题" },
         {
-          field: "address",
-          title: "Address",
+          field: "description",
+          title: "文章简介",
           showOverflow: true,
-          editRender: { name: "input" },
+        },
+        { field: "createTime", title: "创建时间" },
+        { field: "changeTime", title: "修改时间" },
+        { field: "state", title: "状态" },
+        {
+          field: "operating",
+          title: "操作",
         },
       ],
     } as VxeGridProps);
+    const tablePage = reactive({
+      searchName: "",
+      total: 0,
+      pageSize: 10,
+      currentPage: 1,
+    });
+    const handlePageChange: VxePagerEvents.PageChange = ({
+      currentPage,
+      pageSize,
+    }) => {
+      tablePage.currentPage = currentPage;
+      tablePage.pageSize = pageSize;
+      getList();
+    };
+    const getList = () => {
+      gridOptions.loading = true;
+      // 获取文章列表
+      getArticleList(tablePage)
+        .then((res) => {
+          console.log(res);
+          if (res.errorCode === 0) {
+            gridOptions.loading = false;
+            tablePage.total = res.data.total;
+            gridOptions.data = res.data.data;
+            successMessage("获取数据成功！");
+          } else {
+            errorMessage(res.message);
+          }
+        })
+        .catch((error) => {
+          errorMessage(error.message);
+        });
+    };
+    getList();
 
     return {
       gridOptions,
+      tablePage,
+      handlePageChange,
     };
   },
 };
 </script>
 
 <style scoped lang='scss'>
+.table {
+  margin: 0 20px 0 20px;
+}
 </style>
