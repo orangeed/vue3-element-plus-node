@@ -35,8 +35,12 @@ export class AppModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes(
-        // { path: 'user/login', method: RequestMethod.POST },
-        { path: 'user/userInfo', method: RequestMethod.GET }
+        { path: 'user/userInfo', method: RequestMethod.GET },
+        { path: 'user/logout', method: RequestMethod.DELETE },
+        { path: 'user/logout', method: RequestMethod.DELETE },
+        { path: 'article', method: RequestMethod.POST },
+        { path: 'article', method: RequestMethod.GET },
+        { path: 'article/detail', method: RequestMethod.GET },
       );
   }
 }

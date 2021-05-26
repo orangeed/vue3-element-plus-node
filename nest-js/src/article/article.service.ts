@@ -22,4 +22,10 @@ export class ArticleService {
         db = db.skip(articleListQuery.pageSize * (articleListQuery.currentPage - 1)).take(articleListQuery.pageSize)
         return await db.getManyAndCount()
     }
+    // 获取某一条信息
+    async getArticleDetail(articleDetail) {
+        console.log('articleDetail', articleDetail);
+        const { id } = articleDetail
+        return await this.article.findOne({ id })
+    }
 }

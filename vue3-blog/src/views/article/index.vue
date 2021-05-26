@@ -2,7 +2,7 @@
  * @Author: orange 
  * @Date: 2021-05-22 16:42:40 
  * @Last Modified by: orange
- * @Last Modified time: 2021-05-25 17:01:21
+ * @Last Modified time: 2021-05-26 10:53:02
  */
 <template>
   <div class="table">
@@ -35,6 +35,12 @@
         width="200"
       ></vxe-column>
       <vxe-column
+        field="author"
+        title="作者"
+        align="center"
+        width="200"
+      ></vxe-column>
+      <vxe-column
         field="description"
         title="文章简介"
         align="center"
@@ -58,15 +64,15 @@
           </el-tag>
         </template>
       </vxe-column>
-      <vxe-column
-        field="operating"
-        title="操作"
-        align="center"
-        width="100"
-      >
-      <template>
-        
-      </template>
+      <vxe-column field="operating" title="操作" align="center" width="100">
+        <template #default="{ row }">
+          <vxe-button
+            status="primary"
+            size="mini"
+            @click="handleShowDetail(row.id)"
+            >详情</vxe-button
+          >
+        </template>
       </vxe-column>
     </vxe-table>
     <vxe-pager
@@ -87,42 +93,6 @@
     >
     </vxe-pager>
   </div>
-
-  <!-- <vxe-grid v-bind="gridOptions" class="table">
-    <template #buttons>
-      <vxe-input
-        v-model="tablePage.searchName"
-        placeholder="搜索文章标题"
-        style="width: 300px"
-      >
-        <template #prefix> <i class="fa fa-search"></i> </template
-      ></vxe-input>
-      <vxe-button icon="vxe-icon--search">搜索</vxe-button>
-      <vxe-button status="primary" icon="vxe-icon--plus">新增</vxe-button>
-    </template>
-    <template #pager>
-      <vxe-pager
-        :layouts="[
-          'Sizes',
-          'PrevJump',
-          'PrevPage',
-          'Number',
-          'NextPage',
-          'NextJump',
-          'FullJump',
-          'Total',
-        ]"
-        v-model:current-page="tablePage.currentPage"
-        v-model:page-size="tablePage.pageSize"
-        :total="tablePage.total"
-        @page-change="handlePageChange"
-      >
-      </vxe-pager>
-    </template>
-    <template #num_footer>
-      <vxe-button status="primary" icon="vxe-icon--plus">新增</vxe-button>
-    </template>
-  </vxe-grid> -->
 </template>
 
 <script lang='ts'>
@@ -130,9 +100,12 @@ import { reactive } from "vue";
 import { VxeGridProps, VxePagerEvents } from "vxe-table";
 import { getArticleList } from "/@/api/article";
 import { successMessage, errorMessage } from "/@/utils/message";
+import { useRouter } from "vue-router";
+
 export default {
   name: "user",
   setup() {
+    const router = useRouter();
     const gridOptions = reactive({
       border: true,
       resizable: true,
@@ -176,6 +149,7 @@ export default {
         { type: "seq", width: 60 },
         // { field: "title", title: "title", editRender: { name: "input" } },
         { field: "title", title: "标题" },
+        { field: "author", title: "作者" },
         {
           field: "description",
           title: "文章简介",
@@ -224,11 +198,16 @@ export default {
         });
     };
     getList();
+    const handleShowDetail = (id) => {
+      console.log("id", id);
+      router.push(`/article/edit?id=${id}`);
+    };
 
     return {
       gridOptions,
       tablePage,
       handlePageChange,
+      handleShowDetail,
     };
   },
 };

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { articleInfoDto, articleListDto } from 'src/class/class';
 import { MsgService } from 'src/msg/msg.service';
-import { articleCreateErr, getArticleListErr, success } from 'src/utils/state';
+import { articleCreateErr, getArticleListErr, getArticleDetailErr, success } from 'src/utils/state';
 import { ArticleService } from './article.service';
 
 @Controller('article')
@@ -24,8 +24,8 @@ export class ArticleController {
     async getArticleList(@Query() articleListQuery: articleListDto) {
         const _articleList = await this.articleService.getArticleList(articleListQuery)
         if (!_articleList) return this.MSG.fail(getArticleListErr)
-        console.log('_articleList',_articleList[0]);
-        _articleList[0].forEach(v=>{
+        console.log('_articleList', _articleList[0]);
+        _articleList[0].forEach(v => {
             console.log(v);
             delete v.content
         })
@@ -34,5 +34,13 @@ export class ArticleController {
             data: _articleList[0]
         }
         return this.MSG.pass(success, returnData)
+    }
+    @Get('/detail')
+    @ApiOperation({ summary: '获取文章详情' })
+    async getArticleDetail(@Query() articleDetail) {
+        const _articleDetail = await this.articleService.getArticleDetail(articleDetail)
+        console.log('_articleDetail', _articleDetail);
+        if (!_articleDetail) return this.MSG.fail(getArticleDetailErr)
+        return this.MSG.pass(success, _articleDetail)
     }
 }

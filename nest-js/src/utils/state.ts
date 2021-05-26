@@ -40,3 +40,8 @@ export const getArticleListErr = {
     errorCode: 103,
     message: '获取文章列表失败'
 }
+
+export const getArticleDetailErr = {
+    errorCode: 104,
+    message: '获取文章详情失败'
+}

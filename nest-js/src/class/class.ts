@@ -38,8 +38,12 @@ export class userLoginDto {
 // 文章信息
 export class articleInfoDto {
     @ApiProperty({ description: '文章标题', example: '这个是第一篇文章' })
-    @IsNotEmpty({ message: '文字标题不能为空' })
+    @IsNotEmpty({ message: '文章标题不能为空' })
     readonly title: string
+
+    @ApiProperty({ description: '文章作者', example: 'orange' })
+    @IsNotEmpty({ message: '文章作者不能为空' })
+    readonly author: string
 
     @ApiProperty({ description: '文章简介', example: '这个是文章简介' })
     @IsNotEmpty({ message: '文章简介不能为空' })

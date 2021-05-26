@@ -20,6 +20,10 @@ export class ArticleEntity {
     @Column()
     title: string
 
+    // 文章作者
+    @Column()
+    author: string
+
     // 文章简介
     @Column()
     description: string
