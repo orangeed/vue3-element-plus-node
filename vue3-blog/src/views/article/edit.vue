@@ -65,7 +65,10 @@
         </el-col>
       </el-row>
     </el-form>
-    <v-md-editor v-model="edit.editFormModel.content" height="100%"></v-md-editor>
+    <v-md-editor
+      v-model="edit.editFormModel.content"
+      height="100%"
+    ></v-md-editor>
     <div class="btn-group">
       <el-button type="primary" @click="handleSave" class="btn-save"
         >保存</el-button
@@ -86,7 +89,7 @@ export default defineComponent({
   setup() {
     // 表单数据
     const edit = reactive({
-      editFormModel:{}
+      editFormModel: {},
       // title: "",
       // author: "",
       // content: "",
@@ -128,7 +131,7 @@ export default defineComponent({
     }
     // 保存文章
     const handleSave = () => {
-      console.log("editFormModel",edit.editFormModel);
+      console.log("editFormModel", edit.editFormModel.createTime);
 
       articleFormRef.value.validate((valid) => {
         console.log("valid", valid);
@@ -146,6 +149,7 @@ export default defineComponent({
           });
       });
     };
+
     return { edit, articleFormRef, rules, handleSave };
   },
 });

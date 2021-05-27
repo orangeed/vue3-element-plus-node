@@ -1,19 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" />
+  <el-container>
+    <el-header> <orangeHeader /></el-header>
+    <el-main class="home"> <home /></el-main>
+    <el-footer> <orangeFooter /></el-footer>
+  </el-container>
 </template>
 
 <script lang='ts'>
-import HelloWorld from "./components/HelloWorld.vue";
-import { name } from "./utils/iddex";
+import orangeHeader from "./components/header/index.vue";
+import Home from "./views/home/index.vue";
+import orangeFooter from "./components/footer/index.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    orangeHeader,
+    Home,
+    orangeFooter,
   },
-  setup(){
-    console.log('name',name);
-  }
+  setup() {},
 };
 </script>
+<style lang="scss" scoped>
+.home {
+  // width: 1200px;
+  margin: 0 auto;
+}
+</style>

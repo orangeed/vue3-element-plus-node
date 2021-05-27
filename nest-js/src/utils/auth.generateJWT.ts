@@ -16,24 +16,28 @@ export class AuthMiddleware implements NestMiddleware {
 
     async use(req: Request, res: Response, next: NextFunction) {
         const Access_Token = req.headers['access-token'];
-        console.log('req', req.headers);
-        console.log('Access_Token',Access_Token);
-        if (Access_Token) {
-            const token = Access_Token.toString();
-
-            const decoded: any = this.verify(token);
-            const user = await this.userService.findById(decoded.id);
-
-            if (!user) {
-                throw new HttpException('User not found.', HttpStatus.UNAUTHORIZED);
-            }
-
-            // req.user = user;
+        const isWeb = req.headers['isweb']
+        if (isWeb) {
             next();
-
         } else {
-            throw new HttpException('没有token', HttpStatus.UNAUTHORIZED);
+            if (Access_Token) {
+                const token = Access_Token.toString();
+
+                const decoded: any = this.verify(token);
+                const user = await this.userService.findById(decoded.id);
+
+                if (!user) {
+                    throw new HttpException('User not found.', HttpStatus.UNAUTHORIZED);
+                }
+
+                // req.user = user;
+                next();
+
+            } else {
+                throw new HttpException('没有token', HttpStatus.UNAUTHORIZED);
+            }
         }
+
     }
     private verify(token: string) {
         let decoded: any

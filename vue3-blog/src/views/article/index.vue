@@ -2,7 +2,7 @@
  * @Author: orange 
  * @Date: 2021-05-22 16:42:40 
  * @Last Modified by: orange
- * @Last Modified time: 2021-05-26 10:53:02
+ * @Last Modified time: 2021-05-27 10:25:22
  */
 <template>
   <div class="table">
@@ -44,6 +44,7 @@
         field="description"
         title="文章简介"
         align="center"
+        min-width="200px"
       ></vxe-column>
       <vxe-column
         field="createTime"
@@ -101,6 +102,7 @@ import { VxeGridProps, VxePagerEvents } from "vxe-table";
 import { getArticleList } from "/@/api/article";
 import { successMessage, errorMessage } from "/@/utils/message";
 import { useRouter } from "vue-router";
+import { dateToSecond } from "/@/utils/tool";
 
 export default {
   name: "user",
@@ -187,6 +189,9 @@ export default {
           if (res.errorCode === 0) {
             gridOptions.loading = false;
             tablePage.total = res.data.total;
+            res.data.data.forEach((v) => {
+              v.createTime = dateToSecond(v.createTime);
+            });
             gridOptions.data = res.data.data;
             successMessage("获取数据成功！");
           } else {

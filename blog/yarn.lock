@@ -640,6 +640,13 @@ aws4@^1.8.0:
   resolved "https://registry.nlark.com/aws4/download/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha1-1h9G2DslGSUOJ4Ta9bCUeai0HFk=
 
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.npm.taobao.org/axios/download/axios-0.21.1.tgz?cache=0&sync_timestamp=1608609215811&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxios%2Fdownload%2Faxios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+  dependencies:
+    follow-redirects "^1.10.0"
+
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.2.tgz?cache=0&sync_timestamp=1617714233441&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbalanced-match%2Fdownload%2Fbalanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
@@ -1382,6 +1389,11 @@ dayjs@1.x:
   resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.4.tgz#8e544a9b8683f61783f570980a8a80eaf54ab1e2"
   integrity sha1-jlRKm4aD9heD9XCYCoqA6vVKseI=
 
+dayjs@^1.10.5:
+  version "1.10.5"
+  resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.5.tgz?cache=0&sync_timestamp=1622012194079&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
+  integrity sha1-VgDfRUj8JFOz8WPrsqu+llzPuYY=
+
 debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz?cache=0&sync_timestamp=1614330710870&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1796,7 +1808,7 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.14.1"
   resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
   integrity sha1-2RFN7Qoc/dM04WTmZirQK/2R/0M=
@@ -3245,6 +3257,11 @@ npmlog@^4.0.0, npmlog@^4.1.2:
     console-control-strings "~1.1.0"
     gauge "~2.7.3"
     set-blocking "~2.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/nprogress/download/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
 
 number-is-nan@^1.0.0:
   version "1.0.1"

@@ -1,22 +1,18 @@
-<!-- markdown 预览组件 -->
+<!-- 底部 -->
 <template>
-  <div class="container">1</div>
+  <div class="container">这个是底部</div>
 </template>
 
 <script lang="ts">
-import marked from "marked";
 import { defineComponent, reactive, toRefs } from "vue";
 interface dataProps {}
 export default defineComponent({
   name: "",
   components: {},
   setup() {
-    const data = reactive({
-      blog: null,
-    });
-    const refData = toRefs(data);
+    const data = reactive({});
     return {
-      ...refData,
+      data,
     };
   },
 });
@@ -24,4 +20,3 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 </style>
-
