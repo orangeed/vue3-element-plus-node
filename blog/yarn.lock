@@ -4668,6 +4668,11 @@ vite@^1.0.0-rc.13:
     vue "^3.0.3"
     ws "^7.3.1"
 
+vue-router@4.0.6:
+  version "4.0.6"
+  resolved "https://registry.nlark.com/vue-router/download/vue-router-4.0.6.tgz?cache=0&sync_timestamp=1620899536020&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-router%2Fdownload%2Fvue-router-4.0.6.tgz#91750db507d26642f225b0ec6064568e5fe448d6"
+  integrity sha1-kXUNtQfSZkLyJbDsYGRWjl/kSNY=
+
 vue@^3.0.3, vue@^3.0.4:
   version "3.0.11"
   resolved "https://registry.nlark.com/vue/download/vue-3.0.11.tgz?cache=0&sync_timestamp=1620856192360&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue%2Fdownload%2Fvue-3.0.11.tgz#c82f9594cbf4dcc869241d4c8dd3e08d9a8f4b5f"

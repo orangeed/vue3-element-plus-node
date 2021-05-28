@@ -1,19 +1,22 @@
 <!-- 首页 -->
-<!-- 首页 -->
 <template>
   <div id="home">
     <articleList class="left" />
-    <div class="right">aside</div>
+    <div class="right">
+      <orangeAside />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import ArticleList from "../article/index.vue";
+import OrangeAside from "./components/aside.vue";
+import ArticleList from "./components/main.vue";
+
 interface dataProps {}
 export default defineComponent({
   name: "home",
-  components: { ArticleList },
+  components: { ArticleList, OrangeAside },
   setup() {
     const data = reactive({});
     return {
@@ -25,10 +28,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #home {
-  width: 1200px;
+  max-width: 1630px;
+  margin: 0 auto;
   display: flex;
   .left {
     flex: 4;
+    margin-right: 30px;
   }
   .right {
     flex: 1;

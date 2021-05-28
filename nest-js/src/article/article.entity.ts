@@ -29,7 +29,7 @@ export class ArticleEntity {
     description: string
 
     // markdown 文章内容
-    @Column()
+    @Column('mediumtext')
     content: string
 
     // 发布时间

@@ -19,7 +19,7 @@ export class ArticleService {
     // 分页查询
     async getArticleList(articleListQuery: articleListDto) {
         let db = this.article.createQueryBuilder('article')
-        db = db.skip(articleListQuery.pageSize * (articleListQuery.currentPage - 1)).take(articleListQuery.pageSize)
+        db = db.skip(articleListQuery.pageSize * (articleListQuery.currentPage - 1)).take(articleListQuery.pageSize).orderBy('id', 'DESC')
         return await db.getManyAndCount()
     }
     // 获取某一条信息

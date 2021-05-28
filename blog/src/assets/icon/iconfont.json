@@ -1,0 +1,30 @@
+{
+  "id": "2577472",
+  "name": "vue3",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5697065",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "17512738",
+      "name": "知乎 ",
+      "font_class": "zhihu",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "18393608",
+      "name": "微信公众号",
+      "font_class": "weixingongzhonghao",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}
