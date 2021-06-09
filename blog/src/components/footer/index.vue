@@ -8,21 +8,33 @@
     <div class="right">
       <el-tooltip placement="top" effect="light">
         <template #content>
-          <img src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg" style="width:150px" alt="微博">
+          <img
+            src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg"
+            style="width: 150px"
+            alt="微博"
+          />
         </template>
-        <i class="iconfont icon-weibo weibo">
+        <i class="iconfont icon-weibo weibo" />
       </el-tooltip>
       <el-tooltip placement="top" effect="light">
         <template #content>
-          <img src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg" style="width:150px" alt="微信公众号">
+          <img
+            src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg"
+            style="width: 150px"
+            alt="微信公众号"
+          />
         </template>
-        <i class="iconfont icon-weixingongzhonghao weixingongzhonghao">
+        <i class="iconfont icon-weixingongzhonghao weixingongzhonghao" />
       </el-tooltip>
       <el-tooltip placement="top" effect="light">
-        <template #content> 
-          <img src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg" style="width:150px" alt="知乎">
+        <template #content>
+          <img
+            src="https://s1.ax1x.com/2020/07/04/NxncdA.jpg"
+            style="width: 150px"
+            alt="知乎"
+          />
         </template>
-        <i class="iconfont icon-zhihu zhihu">
+        <i class="iconfont icon-zhihu zhihu" />
       </el-tooltip>
     </div>
   </div>

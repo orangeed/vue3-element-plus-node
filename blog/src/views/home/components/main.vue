@@ -36,7 +36,7 @@
 import { defineComponent, reactive, toRefs } from "vue";
 import { getArticleList } from "../../../api/article";
 import { dateToSecond } from "../../../utils/index";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 interface dataProps {}
 export default defineComponent({
@@ -44,6 +44,9 @@ export default defineComponent({
   components: {},
   setup() {
     const router = useRouter();
+    const route = useRoute();
+    console.log('router',router);
+    console.log("route", route);
     const data = reactive({
       articleList: [],
     });
@@ -73,7 +76,6 @@ export default defineComponent({
     return {
       data,
       handleToDetail,
-      router,
     };
   },
 });

@@ -1,16 +1,13 @@
 <!-- 首页 -->
 <template>
   <div id="home">
-    <articleList class="left" />
-    <div class="right">
-      <orangeAside />
-    </div>
+    <articleList />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import OrangeAside from "./components/aside.vue";
+import OrangeAside from "../../components/aside/aside.vue";
 import ArticleList from "./components/main.vue";
 
 interface dataProps {}
@@ -28,15 +25,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #home {
-  max-width: 1630px;
-  margin: 0 auto;
-  display: flex;
-  .left {
-    flex: 4;
-    margin-right: 30px;
-  }
-  .right {
-    flex: 1;
-  }
 }
 </style>

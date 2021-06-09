@@ -1,27 +1,32 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import Layout from "../layout/index.vue";
+
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
         name: "首页",
-        component: () =>
-            import(/* webpackChunkName: "home" */ "../views/home/index.vue"),
-        meta: {
-            icon: "el-icon-s-home",
-            showLink: true,
-            savedPosition: false,
-        },
+        component: Layout,
+        redirect: '/index',
+        children: [
+            {
+                path: '/index',
+                component: () => import(/* webpackChunkName: "home" */ "../views/home/index.vue"),
+            }
+        ]
     },
     {
-        path: "/articleDetail",
+        path: "/",
         name: "文章详情",
-        component: () =>
-            import(/* webpackChunkName: "home" */ "../views/home/index.vue"),
-        meta: {
-            icon: "el-icon-s-home",
-            showLink: true,
-            savedPosition: false,
-        },
+        component: Layout,
+        redirect: '/index',
+        children: [
+            {
+                path: "/articleDetail",
+                component: () =>
+                    import(/* webpackChunkName: "article" */ "../views/article/index.vue"),
+            }
+        ]
     },
 ]
 

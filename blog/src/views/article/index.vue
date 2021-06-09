@@ -1,6 +1,6 @@
 <!-- 文章页面 -->
 <template>
-  <div id="article">
+  <div id="preview">
     <preview />
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import Preview from "./components/preview.vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 interface dataProps {}
 export default defineComponent({
@@ -16,6 +16,7 @@ export default defineComponent({
   components: { Preview },
   setup() {
     const router = useRouter();
+
     const data = reactive({});
     console.log("router", router.query);
     return {

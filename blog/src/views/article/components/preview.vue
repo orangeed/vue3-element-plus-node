@@ -1,6 +1,8 @@
 <!-- markdown 预览组件 -->
 <template>
-  <div class="container">1</div>
+  <div class="preview-com">
+    <el-card :body-style="{ padding: '0px' }" class="card">11 </el-card>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,5 +25,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+#preview-com {
+  .card {
+    width: 100%;
+  }
+}
 </style>
 
