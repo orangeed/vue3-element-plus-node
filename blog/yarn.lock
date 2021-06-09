@@ -28,13 +28,6 @@
   resolved "https://registry.nlark.com/@babel/parser/download/@babel/parser-7.14.3.tgz#9b530eecb071fd0c93519df25c5ff9f14759f298"
   integrity sha1-m1MO7LBx/QyTUZ3yXF/58UdZ8pg=
 
-"@babel/runtime@^7.14.0":
-  version "7.14.0"
-  resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.14.0.tgz?cache=0&sync_timestamp=1619727501090&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
-  integrity sha1-RnlLwgthLF915i3QceJN/ZXxy+Y=
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/types@^7.12.0", "@babel/types@^7.13.0":
   version "7.14.2"
   resolved "https://registry.nlark.com/@babel/types/download/@babel/types-7.14.2.tgz?cache=0&sync_timestamp=1620839476067&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.14.2.tgz#4208ae003107ef8a057ea8333e56eb64d2f6a2c3"
@@ -48,16 +41,15 @@
   resolved "https://registry.nlark.com/@braintree/sanitize-url/download/@braintree/sanitize-url-3.1.0.tgz#8ff71d51053cd5ee4981e5a501d80a536244f7fd"
   integrity sha1-j/cdUQU81e5JgeWlAdgKU2JE9/0=
 
-"@kangc/v-md-editor@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.nlark.com/@kangc/v-md-editor/download/@kangc/v-md-editor-2.2.6.tgz#f26fab0d2ad6d924bf5019916c201eacd84d7e12"
-  integrity sha1-8m+rDSrW2SS/UBmRbCAerNhNfhI=
+"@kangc/v-md-editor@^1.7.5":
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/@kangc/v-md-editor/-/v-md-editor-1.7.5.tgz#11556b93712b54aa4040463e1d665068a3533aa9"
+  integrity sha512-AlT0k79S/3a1nkYkiHrkhwBH73AjvjbBGoIB43V3RKfDswjjKT3yFytWShDOQ7oCe+LqR9yO8k8X/gINjEqYkA==
   dependencies:
-    "@babel/runtime" "^7.14.0"
     "@vuepress/markdown" "^1.8.2"
     codemirror "^5.61.0"
     copy-to-clipboard "^3.3.1"
-    highlight.js "^10.7.2"
+    highlight.js "^10.7.1"
     insert-text-at-cursor "^0.3.0"
     katex "^0.13.11"
     markdown-it "^12.0.6"
@@ -2126,10 +2118,15 @@ he@^1.1.1, he@^1.2.0:
   resolved "https://registry.nlark.com/he/download/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
 
-highlight.js@^10.7.2:
-  version "10.7.2"
-  resolved "https://registry.nlark.com/highlight.js/download/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
-  integrity sha1-iTGbhh7cZsSIVO0ebaIeqJ+Ec2A=
+highlight.js@^10.7.1:
+  version "10.7.3"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
+  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
+
+highlight.js@^11.0.1:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.0.1.tgz#a78bafccd9aa297978799fe5eed9beb7ee1ef887"
+  integrity sha512-EqYpWyTF2s8nMfttfBA2yLKPNoZCO33pLS4MnbXQ4hECf1TKujCt1Kq7QAdrio7roL4+CqsfjqwYj4tYgq0pJQ==
 
 hosted-git-info@^2.1.4:
   version "2.8.9"
@@ -3735,11 +3732,6 @@ redent@^1.0.0:
   dependencies:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
-
-regenerator-runtime@^0.13.4:
-  version "0.13.7"
-  resolved "https://registry.nlark.com/regenerator-runtime/download/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
-  integrity sha1-ysLazIoepnX+qrrriugziYrkb1U=
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"

@@ -19,12 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "/",
         name: "文章详情",
         component: Layout,
-        redirect: '/index',
+        redirect: '/articleDetail',
         children: [
             {
                 path: "/articleDetail",
-                component: () =>
-                    import(/* webpackChunkName: "article" */ "../views/article/index.vue"),
+                component: () => import(/* webpackChunkName: "article" */ "../views/article/index.vue"),
             }
         ]
     },

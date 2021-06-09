@@ -15,9 +15,9 @@ import { ArticleModule } from './article/article.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'jixin', //公司电脑数据库密码
-      // password: '123456', //自己电脑数据库密码 
-      database: 'addressbook',
+      // password: 'jixin', //公司电脑数据库密码
+      password: 'orange123456.', //自己电脑数据库密码 
+      database: 'blog',
       synchronize: true,
       entities: [__dirname + '/**/*.entity.{js,ts}']
     }),

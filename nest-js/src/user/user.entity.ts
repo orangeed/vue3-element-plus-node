@@ -4,10 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BeforeInsert,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  BeforeUpdate
+  // JoinTable,
+  // ManyToMany,
+  // OneToMany,
+  // BeforeUpdate
 } from 'typeorm';
 // import { IsEmail } from 'class-validator';
 import * as argon2 from 'argon2';
@@ -40,7 +40,7 @@ export class UserEntity {
 
   // 联系方式
   @Column()
-  phone: number
+  phone: string
 
   // 身份证号码
   @Column()

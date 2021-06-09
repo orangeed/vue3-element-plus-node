@@ -7,13 +7,12 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import OrangeAside from "../../components/aside/aside.vue";
 import ArticleList from "./components/main.vue";
 
 interface dataProps {}
 export default defineComponent({
   name: "home",
-  components: { ArticleList, OrangeAside },
+  components: { ArticleList },
   setup() {
     const data = reactive({});
     return {
@@ -27,3 +26,4 @@ export default defineComponent({
 #home {
 }
 </style>
+

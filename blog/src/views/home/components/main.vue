@@ -15,15 +15,17 @@
         <div class="card-des">
           <p class="title" @click="handleToDetail(item.id)">{{ item.title }}</p>
           <p>
-            <span class="author"
-              ><i class="el-icon-user" style="color: orange" />{{ item.author }}
+            <span class="author">
+              <i class="el-icon-user" style="color: orange" />
+              {{ item.author }}
               |
             </span>
-            <span class="author"
-              ><i class="el-icon-date" style="color: pink" />发表于：{{
-                item.createTime
-              }}</span
-            >
+            <span class="author">
+              <i class="el-icon-date" style="color: pink" />
+              发表于：{{
+              item.createTime
+              }}
+            </span>
           </p>
           <p>{{ item.description }}</p>
         </div>
@@ -45,7 +47,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const route = useRoute();
-    console.log('router',router);
+    console.log("router", router);
     console.log("route", route);
     const data = reactive({
       articleList: [],
@@ -90,10 +92,15 @@ export default defineComponent({
     display: flex;
   }
   .card-image {
-    flex: 1;
+    // flex: 1;
+    height: 240px;
+    width: 240px;
     overflow: hidden;
     img {
+      // height: 240px;
+      // width: 240px;
       height: 100%;
+      // width: 100%;
       &:hover {
         transform: scale(1.1);
         transition: all 0.5s;
@@ -101,7 +108,7 @@ export default defineComponent({
     }
   }
   .card-des {
-    flex: 4;
+    // flex: 4;
     font-size: 14px;
     text-align: left;
     padding: 0px 40px;
