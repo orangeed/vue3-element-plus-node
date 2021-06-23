@@ -45,42 +45,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-#container {
-  padding: 0px;
-  margin: 0px;
 
-  .header-image {
-    padding: 0px;
-    margin-top: -60px;
-    img {
-      height: 40vh;
-      width: 100%;
-    }
-  }
-  .home {
-    max-width: 1630px;
-    // min-width: 1630px;
-    margin: 0 auto;
-    display: flex;
-    .left {
-      flex: 4;
-      margin-right: 30px;
-      width: 100%;
-    }
-    .right {
-      flex: 1;
-      width: 100%;
-    }
-  }
-}
-.el-header {
-  padding: 0;
-  z-index: 99;
-}
-.el-main {
-  padding: 0;
-}
-.el-footer {
-  padding: 0;
-}
 </style>

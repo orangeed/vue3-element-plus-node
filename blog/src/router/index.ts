@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Layout from "../layout/index.vue";
 
 
@@ -27,10 +27,15 @@ const routes: Array<RouteRecordRaw> = [
             }
         ]
     },
+    {
+        // 找不到路由重定向到404页面
+        path: "/:pathMatch(.*)",
+        component: () => import("../views/error/404.vue"),
+    },
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
     scrollBehavior(to, from, savedPosition) {
         return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
-<!-- 文章页面 -->
+<!-- 文章列表 -->
 <template>
-  <div id="main">
+  <div id="mainList">
     <el-card
       :body-style="{ padding: '0px' }"
       v-for="(item, index) in data.articleList"
@@ -22,9 +22,7 @@
             </span>
             <span class="author">
               <i class="el-icon-date" style="color: pink" />
-              发表于：{{
-              item.createTime
-              }}
+              发表于：{{ item.createTime }}
             </span>
           </p>
           <p>{{ item.description }}</p>
@@ -38,11 +36,16 @@
 import { defineComponent, reactive, toRefs } from "vue";
 import { getArticleList } from "../../../api/article";
 import { dateToSecond } from "../../../utils/index";
-import { useRouter, useRoute } from "vue-router";
+import {
+  useRouter,
+  useRoute,
+  onBeforeRouteLeave,
+  onBeforeRouteUpdate,
+} from "vue-router";
 
 interface dataProps {}
 export default defineComponent({
-  name: "main",
+  name: "mainList",
   components: {},
   setup() {
     const router = useRouter();
@@ -57,6 +60,7 @@ export default defineComponent({
       pageSize: 10,
       currentPage: 1,
     });
+
     // 获取文章列表
     const init = () => {
       getArticleList(pages).then((res) => {
@@ -92,15 +96,12 @@ export default defineComponent({
     display: flex;
   }
   .card-image {
-    // flex: 1;
-    height: 240px;
-    width: 240px;
+    flex: 1;
+    // height: 240px;
+    // width: 240px;
     overflow: hidden;
     img {
-      // height: 240px;
-      // width: 240px;
       height: 100%;
-      // width: 100%;
       &:hover {
         transform: scale(1.1);
         transition: all 0.5s;
@@ -108,7 +109,7 @@ export default defineComponent({
     }
   }
   .card-des {
-    // flex: 4;
+    flex: 4;
     font-size: 14px;
     text-align: left;
     padding: 0px 40px;
