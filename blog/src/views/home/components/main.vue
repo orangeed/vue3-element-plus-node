@@ -25,7 +25,7 @@
               发表于：{{ item.createTime }}
             </span>
           </p>
-          <p>{{ item.description }}</p>
+          <p class="description">{{ item.description }}</p>
         </div>
       </div>
     </el-card>

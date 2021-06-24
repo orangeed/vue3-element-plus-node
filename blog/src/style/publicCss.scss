@@ -1,0 +1,47 @@
+// 自定义颜色
+$white:#fff;
+
+// 内边距
+.pa-l-15 {
+    padding-left: 15px;
+}
+
+.pa-r-15 {
+    padding-right: 15px;
+}
+
+// 外边距
+.mr-l-15 {
+    margin-left: 15px;
+}
+
+.mr-r-15 {
+    margin-right: 15px;
+}
+
+.mr-r-30 {
+    margin-right: 30px;
+}
+
+// 文字
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; //想省略几行就写几
+    -webkit-box-orient: vertical;
+}
+
+// 弹性布局
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+// 颜色
+.color-white {
+    color: $white;
+}

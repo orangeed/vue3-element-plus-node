@@ -1,9 +1,15 @@
 <!-- layout -->
 <template>
   <el-container id="container" class="container">
-    <el-header><orangeHeader /> </el-header>
+    <el-header>
+      <orangeHeader v-if="!getters.isPhone" />
+      <orangePhoneHeader v-else />
+    </el-header>
     <div class="header-image">
-      <img src="https://z3.ax1x.com/2020/12/06/DXvn6s.png" />
+      <img
+        src="https://z3.ax1x.com/2020/12/06/DXvn6s.png"
+        style="height: 40vh; width: 100%"
+      />
     </div>
     <el-main class="home">
       <div class="left">
@@ -27,23 +33,66 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 import OrangeHeader from "../components/header/index.vue";
 import OrangeFooter from "../components/footer/index.vue";
 import OrangeAside from "../components/aside/index.vue";
+import OrangePhoneHeader from "../components/phone-header/index.vue";
 
 interface dataProps {}
 export default defineComponent({
   name: "",
-  components: { OrangeHeader, OrangeFooter, OrangeAside },
+  components: { OrangeHeader, OrangeFooter, OrangeAside, OrangePhoneHeader },
   setup() {
     const route = useRoute();
     const key = computed(() => route.path);
+    const { getters } = useStore();
 
-    return { key };
+    return { key, getters };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+// 整体框架
+#container {
+  padding: 0px;
+  margin: 0px;
 
+  .header-image {
+    padding: 0px;
+    margin-top: -60px;
+  }
+
+  .home {
+    max-width: 1630px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+
+    .left {
+      flex: 4;
+      margin-right: 30px;
+      width: 100%;
+    }
+
+    .right {
+      flex: 1;
+      width: 100%;
+    }
+  }
+}
+
+.el-header {
+  padding: 0;
+  z-index: 99;
+}
+
+.el-main {
+  padding: 0;
+}
+
+.el-footer {
+  padding: 0;
+}
 </style>

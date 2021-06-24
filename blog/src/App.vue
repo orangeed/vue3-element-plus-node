@@ -3,15 +3,16 @@
 </template>
 
 <script lang='ts'>
-import { watch } from "@vue/runtime-core";
+import { useStore } from "vuex";
+
 export default {
   name: "App",
   components: {},
   setup() {
-    window.resize = function () {
-      console.log("浏览器可视宽度" + $(window).width());
-      console.log("页面Body宽度" + $(document.body).width());
-    };
+    const store = useStore();
+    if (document.body.clientWidth < 1024) {
+      store.dispatch("app/isPhone", true);
+    }
   },
 };
 </script>

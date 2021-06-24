@@ -1,29 +1,29 @@
-<!-- 首页 -->
+<!-- 移动端的头部菜单 -->
 <template>
-  <div id="home">
-    <articleList />
+  <div id="phone-header" class="color-white">
+    <div class="flex">
+      <div class="flex-1">橘子的分享</div>
+      <div class="flex-1">right</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import ArticleList from "./components/main.vue";
-
 interface dataProps {}
 export default defineComponent({
-  name: "home",
-  components: { ArticleList },
+  name: "",
+  components: {},
   setup() {
     const data = reactive({});
     return {
-      data,
+      ...toRefs(data),
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-#home {
+#phone-header {
 }
 </style>
-
