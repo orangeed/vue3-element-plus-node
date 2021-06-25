@@ -2,22 +2,36 @@
 <template>
   <div id="phone-header" class="color-white">
     <div class="flex">
-      <div class="flex-1">橘子的分享</div>
-      <div class="flex-1">right</div>
+      <div class="flex-1 text-left pa-l-15">橘子的分享</div>
+      <div class="flex-1 text-right pa-r-15">
+        <i class="iconfont icon-soushuo soushuo pa-r-15" />
+        <i class="iconfont icon-menu-two menu" @click="handleShowMenu" />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
 interface dataProps {}
 export default defineComponent({
   name: "",
   components: {},
   setup() {
     const data = reactive({});
+    const { dispatch, getters } = useStore();
+    console.log("getters", getters);
+    const handleShowMenu = () => {
+      console.log(1);
+      if (getters.showMenu) {
+        dispatch("app/showMenu", false);
+      }
+      dispatch("app/showMenu", true);
+    };
     return {
       ...toRefs(data),
+      handleShowMenu,
     };
   },
 });
@@ -25,5 +39,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #phone-header {
+  font-size: 20px;
+  line-height: 60px;
+  .soushuo {
+    font-size: 20px;
+  }
+  .menu {
+    font-size: 20px;
+  }
 }
 </style>

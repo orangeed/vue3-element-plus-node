@@ -32,6 +32,14 @@ $white:#fff;
     -webkit-box-orient: vertical;
 }
 
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
 // 弹性布局
 .flex {
     display: flex;
@@ -40,6 +48,7 @@ $white:#fff;
 .flex-1 {
     flex: 1;
 }
+
 
 // 颜色
 .color-white {
