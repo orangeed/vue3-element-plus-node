@@ -28,7 +28,11 @@ const viteConfig: UserConfig = {
     },
     // 代理配置
     proxy: {
-        // '/xx': 'http://10.192.195.96:8087',
+        // '/': {
+        //     target: '/',
+        //     changeOrigin: true,//设置访问目标地址允许跨域
+        //     rewrite: path => path.replace(/^\/index/, '')
+        // }
     },
     // 第三方配置
     optimizeDeps: {
@@ -38,6 +42,7 @@ const viteConfig: UserConfig = {
             "@kangc/v-md-editor/lib/theme/github.js"
         ],
     },
+
 }
 
 //

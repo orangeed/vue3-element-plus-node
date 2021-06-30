@@ -1,13 +1,27 @@
 // 自定义颜色
 $white:#fff;
 
+// 自定义文字大小
+$font-size-14:14px;
+$font-size-16:16px;
+$font-size-18:18px;
+$font-size-20:20px;
+
+
+
+
 // 内边距
+
 .pa-l-15 {
     padding-left: 15px;
 }
 
 .pa-r-15 {
     padding-right: 15px;
+}
+
+.pa-l-30{
+    padding-left: 30px;
 }
 
 // 外边距
@@ -19,8 +33,16 @@ $white:#fff;
     margin-right: 15px;
 }
 
+.mr-t-15 {
+    margin-top: 15px;
+}
+
 .mr-r-30 {
     margin-right: 30px;
+}
+
+.mr-l-30{
+    margin-left: 30px;
 }
 
 // 文字
@@ -40,6 +62,22 @@ $white:#fff;
     text-align: left;
 }
 
+.f-s-14 {
+    font-size: $font-size-14;
+}
+
+.f-s-16 {
+    font-size: $font-size-16 !important;
+}
+
+.f-s-18 {
+    font-size: $font-size-18;
+}
+
+.f-s-20 {
+    font-size: $font-size-20 !important;
+}
+
 // 弹性布局
 .flex {
     display: flex;
@@ -49,6 +87,13 @@ $white:#fff;
     flex: 1;
 }
 
+.flex-jcc {
+    justify-content: center;
+}
+
+.flex-aic {
+    align-items: center;
+}
 
 // 颜色
 .color-white {

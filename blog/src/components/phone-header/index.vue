@@ -9,21 +9,23 @@
       </div>
     </div>
   </div>
+  <phoneMenu />
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
+import PhoneMenu from "../phone-menu/index.vue";
+
 interface dataProps {}
 export default defineComponent({
   name: "",
-  components: {},
+  components: { PhoneMenu },
   setup() {
     const data = reactive({});
     const { dispatch, getters } = useStore();
     console.log("getters", getters);
     const handleShowMenu = () => {
-      console.log(1);
       if (getters.showMenu) {
         dispatch("app/showMenu", false);
       }
