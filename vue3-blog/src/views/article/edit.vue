@@ -115,7 +115,7 @@ export default defineComponent({
     const route = useRoute();
     console.log("route", route.query);
     if (route.query.id) {
-      getArticleDetail({ id: route.query.id })
+      getArticleDetail({ articleID: route.query.id })
         .then((res) => {
           if (res.errorCode === 0) {
             edit.editFormModel = { ...res.data };

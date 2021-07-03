@@ -6,7 +6,13 @@ interface stateInter {
 
 const state = {
     isPhone: false,
-    showMenu: false
+    showMenu: false,
+    titleInfo: {
+        title: "",
+        author: '',
+        createTime: '',
+        changeTime: ''
+    }
 }
 
 const mutations = {
@@ -15,6 +21,9 @@ const mutations = {
     },
     SHOW_MENU: (state: stateInter, showMenu: boolean) => {
         state.showMenu = showMenu
+    },
+    SET_TITLEINFO: (state: stateInter, titleInfo: object) => {
+        state.titleInfo = titleInfo
     }
 
 }
@@ -28,6 +37,9 @@ const actions = {
     },
     showMenu({ commit }, showMenu) {
         commit("SHOW_MENU", showMenu)
+    },
+    setTitleInfo({ commit }, titleInfo) {
+        commit('SET_TITLEINFO', titleInfo)
     }
 }
 

@@ -10,6 +10,16 @@
         src="https://z3.ax1x.com/2020/12/06/DXvn6s.png"
         style="height: 40vh; width: 100%"
       />
+      <div class="img-data color-white" v-if="path === '/articleDetail'">
+        <h2>{{ coverInfo.title }}</h2>
+        <p>发布时间：{{ coverInfo.createTime }}</p>
+        <p>作者：{{ coverInfo.author }}</p>
+        <p v-if="coverInfo.changeTime">修改时间：{{ coverInfo.changeTime }}</p>
+      </div>
+      <div class="img-data color-white " v-else-if="path === '/index'">
+        <p class="f-s-20">{{ indexInfo.content }}</p>
+        <p class="f-s-14">{{ indexInfo.author }}</p>
+      </div>
     </div>
     <el-main class="home">
       <div class="left">
@@ -31,14 +41,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, reactive, toRefs, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import OrangeHeader from "../components/header/index.vue";
 import OrangeFooter from "../components/footer/index.vue";
 import OrangeAside from "../components/aside/index.vue";
 import OrangePhoneHeader from "../components/phone-header/index.vue";
+import axios from "axios";
+import emitter from "../utils/mitt";
 
+type Events = {
+  foo: string;
+  bar?: number;
+};
 interface dataProps {}
 export default defineComponent({
   name: "",
@@ -46,9 +62,36 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const key = computed(() => route.path);
-    const { getters } = useStore();
+    const { getters, state } = useStore();
+    const data = reactive({
+      coverInfo: state.app.titleInfo,
+      path: key.value,
+      indexInfo: {},
+    });
+    // 每日一言的api
+    const everyDayApi = (val) => {
+      console.log("everyDayApi", val);
+      if (val === "/index") {
+        axios.get("https://v1.jinrishici.com/all").then((res) => {
+          console.log(res);
+          data.indexInfo = res.data;
+        });
+      }
+    };
+    emitter.on("coverInfo", (val) => {
+      console.log("emitter", val);
+      data.coverInfo = val;
+    });
+    everyDayApi(key.value);
+    watch(key, (val) => {
+      data.path = val;
+      everyDayApi(val);
+    });
+    watch(getters.titleInfo, (val) => {
+      console.log("val", val);
+    });
 
-    return { key, getters };
+    return { ...toRefs(data), key, getters, everyDayApi };
   },
 });
 </script>
@@ -62,6 +105,13 @@ export default defineComponent({
   .header-image {
     padding: 0px;
     margin-top: -60px;
+    position: relative;
+    .img-data {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .home {

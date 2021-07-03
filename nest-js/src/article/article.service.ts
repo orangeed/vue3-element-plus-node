@@ -24,8 +24,7 @@ export class ArticleService {
     }
     // 获取某一条信息
     async getArticleDetail(articleDetail) {
-        console.log('articleDetail', articleDetail);
-        const { id } = articleDetail
+        const id = articleDetail
         return await this.article.findOne({ id })
     }
 }

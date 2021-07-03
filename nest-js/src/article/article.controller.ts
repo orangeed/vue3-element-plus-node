@@ -38,8 +38,7 @@ export class ArticleController {
     @Get('/detail')
     @ApiOperation({ summary: '获取文章详情' })
     async getArticleDetail(@Query() articleDetail) {
-        const _articleDetail = await this.articleService.getArticleDetail(articleDetail)
-        console.log('_articleDetail', _articleDetail);
+        const _articleDetail = await this.articleService.getArticleDetail(articleDetail.articleID)
         if (!_articleDetail) return this.MSG.fail(getArticleDetailErr)
         return this.MSG.pass(success, _articleDetail)
     }

@@ -1,27 +1,24 @@
 <!-- 文章页面 -->
 <template>
-  <div id="preview">
-    <preview />
+  <div id="preview" class="mr-t-15 mr-b-15">
+    <preview :articleID="articleID" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import Preview from "./components/preview.vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
 interface dataProps {}
 export default defineComponent({
-  name: "article",
+  name: "articleContent",
   components: { Preview },
   setup() {
-    const router = useRouter();
-
-    const data = reactive({});
-    console.log("router", router.query);
+    const route = useRoute();
+    const data = reactive({ articleID: route.query.id });
     return {
-      data,
-      router,
+      ...toRefs(data),
     };
   },
 });

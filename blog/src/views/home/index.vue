@@ -6,10 +6,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, getCurrentInstance } from "vue";
 import ArticleList from "./components/main.vue";
+import axios from "axios";
+import emitter from "../../utils/mitt";
 
-interface dataProps {}
 export default defineComponent({
   name: "home",
   components: { ArticleList },

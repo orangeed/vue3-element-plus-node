@@ -12,17 +12,16 @@
         </el-avatar>
       </div>
       <p class="f-s-14">须知少时凌云志，曾许人间第一流</p>
-      <el-menu default-active="2" class="text-left">
+      <el-menu class="text-left" router>
         <el-menu-item
           v-for="(item, index) in menuList"
-          :index="item.name"
+          :index="item.path"
           :key="index"
-          class="mr-l-30"
         >
-          <i :class="`iconfont icon-${item.icon} f-s-16 mr-r-15`" />
-          <template #title
-            ><span class="f-s-16">{{ item.name }}</span></template
-          >
+          <div class="pa-l-30">
+            <i :class="`iconfont icon-${item.icon} f-s-16 mr-r-15`" />
+            <span class="f-s-16">{{ item.name }}</span>
+          </div>
         </el-menu-item>
       </el-menu>
     </el-drawer>

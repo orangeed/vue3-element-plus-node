@@ -5,7 +5,7 @@
     <div class="middle">
       <el-input
         placeholder="请输入内容"
-        v-model="data.searchInfo"
+        v-model="searchInfo"
         class="input-with-select"
       >
         <template #append>
@@ -16,7 +16,7 @@
     <div class="right">
       <span
         class="menu-link"
-        v-for="(item, index) in data.menuLink"
+        v-for="(item, index) in menuLink"
         @click="handleToPage(item.router)"
       >
         <span>{{ item.label }}</span>
@@ -27,41 +27,43 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
 interface dataProps {}
 export default defineComponent({
   name: "",
   components: {},
   setup() {
+    const router = useRouter();
     const data = reactive({
       activeIndex: "1",
       searchInfo: "",
       menuLink: [
         {
-          router: "/home",
+          router: "/index",
           label: "首页",
         },
         {
-          router: "/home",
+          router: "/article",
           label: "文章",
         },
         {
-          router: "/home",
+          router: "/website",
           label: "常用网站",
         },
         {
-          router: "/home",
+          router: "/classification",
           label: "分类",
         },
         {
-          router: "/home",
+          router: "/message",
           label: "留言",
         },
         {
-          router: "/home",
+          router: "/album",
           label: "相册",
         },
         {
-          router: "/home",
+          router: "/about",
           label: "关于",
         },
       ],
@@ -71,10 +73,11 @@ export default defineComponent({
     };
     // 跳转路由
     const handleToPage = (val) => {
-      console.log("val", val);
+      // console.log("val", val);
+      router.push(val);
     };
     return {
-      data,
+      ...toRefs(data),
       handleSelect,
       handleToPage,
     };

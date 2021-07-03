@@ -38,11 +38,8 @@ const viteConfig: UserConfig = {
     optimizeDeps: {
         include: [
             "element-plus/lib/locale/lang/zh-cn",
-            "@kangc/v-md-editor/lib/preview",
-            "@kangc/v-md-editor/lib/theme/github.js"
         ],
     },
-
 }
 
 //
