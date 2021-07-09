@@ -20,3 +20,13 @@ export const isPhone = () => {
         return false
     }
 }
+
+export const debounce = (fn: Function, dealy: number) => {
+    let timer: any
+    return () => {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        timer = setTimeout(fn, dealy)
+    }
+}

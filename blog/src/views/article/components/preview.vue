@@ -100,7 +100,7 @@ blockquote {
 
 blockquote p {
   padding: 15px;
-  background: #eeebeb;
+  background: #ECF7FE;
   border-radius: 5px;
 }
 

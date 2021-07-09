@@ -16,7 +16,7 @@
         <p>作者：{{ coverInfo.author }}</p>
         <p v-if="coverInfo.changeTime">修改时间：{{ coverInfo.changeTime }}</p>
       </div>
-      <div class="img-data color-white " v-else-if="path === '/index'">
+      <div class="img-data color-white" v-else-if="path === '/index'">
         <p class="f-s-20">{{ indexInfo.content }}</p>
         <p class="f-s-14">{{ indexInfo.author }}</p>
       </div>
@@ -108,6 +108,10 @@ export default defineComponent({
     position: relative;
     .img-data {
       position: absolute;
+      width: 100%;
+      @media screen and (max-width: 1024px) {
+        font-size: 14px;
+      }
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>轨迹视角动画暂停与继续</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+        body,
+        html,
+        #container {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        .drawing-panel {
+            z-index: 999;
+            position: fixed;
+            bottom: 3.5rem;
+            margin-left: 3rem;
+            padding: 1rem 1rem;
+            border-radius: .25rem;
+            background-color: #fff;
+            box-shadow: 0 2px 6px 0 rgba(27, 142, 236, 0.5);
+        }
+
+        .btn {
+            width: 90px;
+            height: 30px;
+            float: left;
+            background-color: #fff;
+            color: rgba(27, 142, 236, 1);
+            font-size: 14px;
+            border: 1px solid rgba(27, 142, 236, 1);
+            border-radius: 5px;
+            margin: 0 5px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .btn:hover {
+            background-color: rgba(27, 142, 236, 0.8);
+            color: #fff;
+        }
+    </style>
+    <script src="//mapopen.bj.bcebos.com/github/BMapGLLib/TrackAnimation/src/TrackAnimation.min.js"></script>
+    <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=95N2SGvFmDxYd7gftm8S500FnGxkHrG5"></script>
+    \
+</head>
+
+<body>
+    <div id="container"></div>
+    <ul class="drawing-panel" style="z-index: 99;">
+        <li class="btn" onclick="pauseAni()">暂停</li>
+        <li class="btn" onclick="continueAni()">继续</li>
+    </ul>
+</body>
+
+</html>
+
+<script>
+    // const getData = () => {
+    //     let jsonData = {}
+    //     var url = "1.json" /*json文件url，本地的就写本地的位置*/
+    //     var request = new XMLHttpRequest();
+    //     request.open("get", url); /*设置请求方法与路径*/
+    //     request.send(null); /*不发送数据到服务器*/
+    //     request.onload = function () {
+    //         /*XHR对象获取到返回信息后执行*/
+    //         if (request.status == 200) {
+    //             /*返回状态为200，即为数据获取成功*/
+    //             var json = JSON.parse(request.responseText);
+    //             // for (var i = 0; i < json.length; i++) {
+    //             //     console.log(json[i].name);
+    //             // }
+    //             console.log(json);
+    //             jsonData = json
+    //         }
+    //     }
+    //     return jsonData
+    // }
+    // getData()
+
+
+    // new Promise(resolve => {
+    //     let jsonData = {}
+    //     // window.onload = function () {
+    //     var url = "1.json" /*json文件url，本地的就写本地的位置*/
+    //     var request = new XMLHttpRequest();
+    //     request.open("get", url); /*设置请求方法与路径*/
+    //     request.send(null); /*不发送数据到服务器*/
+    //     request.onload = function () {
+    //         /*XHR对象获取到返回信息后执行*/
+    //         if (request.status == 200) {
+    //             /*返回状态为200，即为数据获取成功*/
+    //             var json = JSON.parse(request.responseText);
+    //             // for (var i = 0; i < json.length; i++) {
+    //             //     console.log(json[i].name);
+    //             // }
+    //             console.log(json);
+    //             resolve(json)
+    //         }
+    //     }
+    // }).then(res => {
+    //     console.log('jsonData', res);
+    // })
+
+    // console.log('jsonData', jsonData);
+    // }
+    let bmap = new BMapGL.Map("container");
+    let convertor = new BMapGL.Convertor();
+    let path, pl, trackAni, timer
+    let pointsbd = []
+    let points = [];
+
+    new Promise((resolve, reject) => {
+            bmap.centerAndZoom(new BMapGL.Point(116.297611, 40.047363), 17);
+            bmap.enableScrollWheelZoom(true);
+            path = [{
+                'lng': 116.297611,
+                'lat': 40.047363
+            }, {
+                'lng': 116.302839,
+                'lat': 40.048219
+            }, {
+                'lng': 116.308301,
+                'lat': 40.050566
+            }, {
+                'lng': 116.305732,
+                'lat': 40.054957
+            }, {
+                'lng': 116.304754,
+                'lat': 40.057953
+            }, {
+                'lng': 116.306487,
+                'lat': 40.058312
+            }, {
+                'lng': 116.307223,
+                'lat': 40.056379
+            }, {
+                'lng': 116.309611,
+                'lat': 40.051363
+            }, {
+                'lng': 116.312839,
+                'lat': 40.052219
+            }, {
+                'lng': 116.313301,
+                'lat': 40.051566
+            }, {
+                'lng': 116.314732,
+                'lat': 40.056957
+            }, {
+                'lng': 116.315754,
+                'lat': 40.055953
+            }, {
+                'lng': 116.316487,
+                'lat': 40.054312
+            }, {
+                'lng': 116.317223,
+                'lat': 40.053379
+            }, {
+                'lng': 116.318611,
+                'lat': 40.047363
+            }, {
+                'lng': 116.319839,
+                'lat': 40.048219
+            }, {
+                'lng': 116.320301,
+                'lat': 40.050566
+            }, {
+                'lng': 116.321732,
+                'lat': 40.054957
+            }, {
+                'lng': 116.322754,
+                'lat': 40.057953
+            }, {
+                'lng': 116.323487,
+                'lat': 40.058312
+            }, {
+                'lng': 116.324223,
+                'lat': 40.056379
+            }, {
+                'lng': 116.325611,
+                'lat': 40.051363
+            }, {
+                'lng': 116.326839,
+                'lat': 40.052219
+            }, {
+                'lng': 116.327301,
+                'lat': 40.051566
+            }, {
+                'lng': 116.328732,
+                'lat': 40.056957
+            }, {
+                'lng': 116.329754,
+                'lat': 40.055953
+            }, {
+                'lng': 116.330487,
+                'lat': 40.054312
+            }, {
+                'lng': 116.331223,
+                'lat': 40.053379
+            }];
+            for (let i = 0; i < path.length; i++) {
+                points.push(new BMapGL.Point(path[i].lng, path[i].lat));
+            }
+            resolve(points)
+        })
+        .then(data => {
+            return new Promise(resolve => {
+                console.log(222);
+                console.log('第一个then', data);
+                var total = 0;
+                var groupCount = 0;
+                if (data.length % 10 > 0) {
+                    groupCount = parseInt(data.length / 10, 10) + 1;
+                } else {
+                    groupCount = parseInt(data.length / 10, 10);
+                }
+                for (var i = 0; i < groupCount; i++) {
+                    var pos = new Array();
+                    for (var j = 0; j < 10; j++) {
+                        if (total < data.length) {
+                            var point = new BMapGL.Point(data[(i * 10) + j].lng, data[(i * 10) + j].lat);
+                            pos.push(point);
+                        }
+                        total++;
+                    }
+                    convertor.translate(pos, COORDINATES_WGS84, COORDINATES_BD09, (data) => {
+                        for (var k = 0; k < data.points.length; k++) {
+                            bmap.addOverlay(new BMapGL.Marker(data.points[k]));
+                            bmap.setCenter(data.points[k]);
+                            pointsbd.push(data.points[k]);
+                        }
+                        // console.log('pointsbd', pointsbd)
+                        timer = setTimeout(() => {
+                            resolve(pointsbd)
+                        }, 1000);
+                    })
+                }
+            })
+        }).then(res => {
+            console.log('第二个then', res);
+            clearTimeout(timer)
+            pl = new BMapGL.Polyline(res);
+            setTimeout(() => {
+                this.start()
+            }, 3000);
+            trackAni = new BMapGLLib.TrackAnimation(bmap, pl, {
+                overallView: true,
+                tilt: 30,
+                duration: 20000,
+                delay: 300
+            });
+        })
+
+    function start() {
+        trackAni.start();
+    }
+
+    function pauseAni() {
+        trackAni.pause();
+    }
+
+    function continueAni() {
+        trackAni.continue();
+    }
+</script>

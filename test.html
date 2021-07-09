@@ -6,48 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .contain {
-            display: flex;
-            height: 200px;
-        }
-
-        .left {
-            flex: 0;
-            flex-basis: 200px;
-            background-color: pink;
-        }
-
-        .middle {
-            flex: 1;
-            min-width: 200px;
-            overflow: hidden;
-            white-space: normal;
-            word-wrap: break-word;
-            background-color: gainsboro;
-        }
-
-        .right {
-            flex: 0;
-            flex-basis: 200px;
-            background-color: paleturquoise;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="contain">
-        <div class="left">left</div>
-        <div class="middle">middlemiddlemiddlemiddlemiddlemiddlemiddlemiddlemiddlemiddlemiddlemiddlemiddle</div>
-        <div class="right">right</div>
+    <div>
+        <input type="text" id="input">
+        <span id="output"></span>
     </div>
+    <table border="10">
+        <tr>
+            <td colspan="2" align="center">员工</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">学历</td>
+            <td align="center">专业</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">毕业学习奥</td>
+        </tr>
+    </table>
+    <blockquote></blockquote>
+
 </body>
+<script>
+    let obj = {}
+    let name = ''
+    Object.defineProperty(obj, "name", {
+        get: function () {
+            return name
+        },
+        set: function (newName) {
+            document.getElementById('input').value = newName
+            document.getElementById('output').innerHTML = newName
+        }
+    })
+    document.addEventListener('keyup', e => {
+        obj.name = e.target.value
+    })
+    // var a, b;
+    // (function () {
+    //     alert(a)
+    //     alert(b)
+    //     var a = b = 3
+    //     alert(a)
+    //     alert(b)
+    // })()
+    // alert(a)
+    // alert(b)
+    var msg = 'hello'
+    for (var i = 0; i < 10; i++) {
+        var msg = 'hello' + i * 2 + i
+        console.log(msg);
+    }
+    console.log('msg', msg);
+</script>
 
 </html>

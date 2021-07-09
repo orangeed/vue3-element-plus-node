@@ -2,7 +2,7 @@
 <template>
   <div id="header">
     <div class="left">LOGO</div>
-    <div class="middle">
+    <!-- <div class="middle">
       <el-input
         placeholder="请输入内容"
         v-model="searchInfo"
@@ -12,8 +12,14 @@
           <el-button icon="el-icon-search"></el-button>
         </template>
       </el-input>
-    </div>
+    </div> -->
     <div class="right">
+      <span class="menu-link">
+        <i
+          class="iconfont icon-soushuo soushuo pa-r-15"
+          @click="handleSearch"
+        />
+      </span>
       <span
         class="menu-link"
         v-for="(item, index) in menuLink"
@@ -28,12 +34,14 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 interface dataProps {}
 export default defineComponent({
   name: "",
   components: {},
   setup() {
     const router = useRouter();
+    const { dispatch, getters, state } = useStore();
     const data = reactive({
       activeIndex: "1",
       searchInfo: "",
@@ -76,10 +84,19 @@ export default defineComponent({
       // console.log("val", val);
       router.push(val);
     };
+    const handleSearch = () => {
+      console.log("state", state.app.dialogVisible);
+      if (getters.dialogVisible) {
+        dispatch("app/setSearch", false);
+      }
+      dispatch("app/setSearch", true);
+      console.log("stateNew", state.app.dialogVisible);
+    };
     return {
       ...toRefs(data),
       handleSelect,
       handleToPage,
+      handleSearch,
     };
   },
 });

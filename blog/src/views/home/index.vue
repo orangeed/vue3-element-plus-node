@@ -2,18 +2,19 @@
 <template>
   <div id="home">
     <articleList />
+    <search />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, getCurrentInstance } from "vue";
 import ArticleList from "./components/main.vue";
-import axios from "axios";
-import emitter from "../../utils/mitt";
+import Search from "../../components/search/index.vue";
+// import emitter from "../../utils/mitt";
 
 export default defineComponent({
   name: "home",
-  components: { ArticleList },
+  components: { ArticleList, Search },
   setup() {
     const data = reactive({});
     return {
