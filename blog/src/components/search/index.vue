@@ -8,11 +8,13 @@
       :before-close="handleClose"
     >
       <div>
-        <el-input v-model="input" placeholder="搜索文章"></el-input>
+        <el-input
+          v-model="searchInfo"
+          placeholder="搜索文章"
+          @change="handleSearch"
+        ></el-input>
       </div>
-      <div>
-        搜索内容区域
-      </div>
+      <div>搜索内容区域</div>
       <!-- <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleClose">取 消</el-button>
@@ -34,9 +36,9 @@ export default defineComponent({
   setup() {
     const { dispatch, getters, state } = useStore();
 
-    // const data = reactive({
-    //   dialogVisible: ,
-    // });
+    const data = reactive({
+      searchInfo:""
+    });
     const handleClose = () => {
       if (getters.dialogVisible) {
         dispatch("app/setSearch", false);
@@ -45,10 +47,14 @@ export default defineComponent({
     const handleOk = () => {
       console.log("ok");
     };
+    const handleSearch = () => {
+      console.log("点击了查询");
+    };
     return {
-      // ...toRefs(data),
+      ...toRefs(data),
       handleClose,
       handleOk,
+      handleSearch
     };
   },
 });

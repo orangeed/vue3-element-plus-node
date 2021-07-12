@@ -75,3 +75,11 @@ export class articleListDto {
     @IsNotEmpty({ message: '当前页数不能为空' })
     readonly currentPage: number
 }
+
+// 模糊查询
+export class searchInfoDto {
+    @ApiProperty({ description: '文章标题' })
+    readonly title: string
+    @ApiProperty({ description: '文章作者' })
+    readonly author: string
+}

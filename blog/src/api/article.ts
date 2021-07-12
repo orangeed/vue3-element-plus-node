@@ -9,3 +9,8 @@ export const getArticleList = (data: object): any => {
 export const getArticleDetail = (data: object): any => {
     return http.request('get', '/article/detail', data)
 }
+
+// 文章或者作者的模糊查询
+export const getSearch = (data: object): any => {
+    return http.request('get', '/search', data)
+}

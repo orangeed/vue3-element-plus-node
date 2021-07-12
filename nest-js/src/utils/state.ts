@@ -1,16 +1,3 @@
-// export class State {
-//     // success消息
-//     public readonly success = {
-//         errorCode: 0,
-//         message: '成功'
-//     }
-//     // error消息
-//     public readonly login = {
-//         errorCode: 100,
-//         message: '用户名错误或者密码不正确'
-//     }
-// }
-
 export const success = {
     errorCode: 0,
     message: '成功'
@@ -44,4 +31,9 @@ export const getArticleListErr = {
 export const getArticleDetailErr = {
     errorCode: 104,
     message: '获取文章详情失败'
+}
+
+export const getSearchErr = {
+    errorCode: 105,
+    message:'查询失败，没有此文章或者该作者'
 }

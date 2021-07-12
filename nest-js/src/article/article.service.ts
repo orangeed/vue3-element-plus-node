@@ -27,4 +27,10 @@ export class ArticleService {
         const id = articleDetail
         return await this.article.findOne({ id })
     }
+    // 模糊搜索
+    async getSearch(searchInfo: string) {
+        let db = this.article.createQueryBuilder('article')
+        db = db.take(10).orderBy('id', 'DESC')
+        return await db.getMany()
+    }
 }
