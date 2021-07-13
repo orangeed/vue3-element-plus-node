@@ -12,5 +12,5 @@ export const getArticleDetail = (data: object): any => {
 
 // 文章或者作者的模糊查询
 export const getSearch = (data: object): any => {
-    return http.request('get', '/search', data)
+    return http.request('get', '/article/search', data)
 }

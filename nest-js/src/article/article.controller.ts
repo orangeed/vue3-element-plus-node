@@ -45,14 +45,9 @@ export class ArticleController {
     @Get('/search')
     @ApiOperation({ summary: '模糊搜索' })
     async getSearch(@Query() searchInfo: searchInfoDto) {
-        const { title, author } = searchInfo
-        let _searchActicle
-        if (title) {
-            _searchActicle = await this.articleService.getSearch(title)
-        }
-        if (author) {
-            _searchActicle = await this.articleService.getSearch(author)
-        }
+        console.log('searchInfo', searchInfo.searchParams);
+        const _searchActicle = await this.articleService.getSearch(searchInfo.searchParams)
+        console.log('_searchActicle',_searchActicle);
         if (!_searchActicle) return this.MSG.fail(getSearchErr)
         return this.MSG.pass(success, _searchActicle)
     }

@@ -14,11 +14,8 @@
       </el-input>
     </div> -->
     <div class="right">
-      <span class="menu-link">
-        <i
-          class="iconfont icon-soushuo soushuo pa-r-15"
-          @click="handleSearch"
-        />
+      <span class="menu-link" @click="handleSearch">
+        <i class="iconfont icon-soushuo soushuo pa-r-15" />
       </span>
       <span
         class="menu-link"
@@ -86,8 +83,9 @@ export default defineComponent({
     };
     const handleSearch = () => {
       console.log("state", state.app.dialogVisible);
-      if (getters.dialogVisible) {
+      if (state.app.dialogVisible) {
         dispatch("app/setSearch", false);
+        return;
       }
       dispatch("app/setSearch", true);
       console.log("stateNew", state.app.dialogVisible);

@@ -1,6 +1,7 @@
 <!-- layout -->
 <template>
   <el-container id="container" class="container">
+    <search />
     <el-header>
       <orangeHeader v-if="!getters.isPhone" />
       <orangePhoneHeader v-else />
@@ -48,6 +49,7 @@ import OrangeHeader from "../components/header/index.vue";
 import OrangeFooter from "../components/footer/index.vue";
 import OrangeAside from "../components/aside/index.vue";
 import OrangePhoneHeader from "../components/phone-header/index.vue";
+import Search from "../components/search/index.vue";
 import axios from "axios";
 import emitter from "../utils/mitt";
 
@@ -58,7 +60,13 @@ type Events = {
 interface dataProps {}
 export default defineComponent({
   name: "",
-  components: { OrangeHeader, OrangeFooter, OrangeAside, OrangePhoneHeader },
+  components: {
+    OrangeHeader,
+    OrangeFooter,
+    OrangeAside,
+    OrangePhoneHeader,
+    Search,
+  },
   setup() {
     const route = useRoute();
     const key = computed(() => route.path);

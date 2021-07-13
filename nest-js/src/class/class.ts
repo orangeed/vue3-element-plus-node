@@ -78,8 +78,6 @@ export class articleListDto {
 
 // 模糊查询
 export class searchInfoDto {
-    @ApiProperty({ description: '文章标题' })
-    readonly title: string
-    @ApiProperty({ description: '文章作者' })
-    readonly author: string
+    @ApiProperty({ description: '模糊搜索的参数' })
+    readonly searchParams: string
 }

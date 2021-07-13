@@ -30,7 +30,7 @@ export class ArticleService {
     // 模糊搜索
     async getSearch(searchInfo: string) {
         let db = this.article.createQueryBuilder('article')
-        db = db.take(10).orderBy('id', 'DESC')
+        db = db.where('article.author = :author OR article.title = :title', { author: searchInfo, title: searchInfo }).take(10).orderBy('id', 'DESC')
         return await db.getMany()
     }
 }
