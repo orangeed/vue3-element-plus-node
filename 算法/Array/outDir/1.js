@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var removeDuplicates = function (nums) {
     var arr = [];
     for (var index = 0; index < nums.length; index++) {
@@ -9,6 +10,7 @@ var removeDuplicates = function (nums) {
     console.log(arr);
 };
 var arr = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+removeDuplicates(arr);
 var removeDuplicates1 = function (nums) {
     if (nums.length === 0) {
         return 0;

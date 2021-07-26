@@ -13,8 +13,8 @@
  * @param {Array]} nums
  * @return {number}
  */
-let removeDuplicates = (nums: []) => {
-    let arr: [] = []
+let removeDuplicates = (nums:number[]) => {
+    let arr: number[] = []
     for (let index = 0; index < nums.length; index++) {
         if (nums[index] !== nums[index + 1]) {
             arr.push(nums[index])
@@ -25,14 +25,14 @@ let removeDuplicates = (nums: []) => {
 
 const arr = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
 
-// removeDuplicates(arr)
+removeDuplicates(arr)
 
 /**
  * 双指针解法，慢扫描的指针i，一个快速扫描的指针j，快速扫描判断j所对应的数据和慢指针对应的数据是否一致，不一致的话，将快速扫描得到的值放在慢扫描的位置，然后慢指针对应的值加一个，直到满扫描结束
  * @param {Array} nums 
  * @returns {Number}
  */
-let removeDuplicates1 = (nums) => {
+let removeDuplicates1 = (nums:number[]) => {
     if (nums.length === 0) {
         return 0
     }
@@ -48,3 +48,5 @@ let removeDuplicates1 = (nums) => {
 }
 
 console.log(removeDuplicates1(arr));
+
+export{}
