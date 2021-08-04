@@ -21,14 +21,48 @@ const rotate = (nums: number[], k: number): void => {
     for (let i = 0; i < nums.length; ++i) {
         arr[(i + k) % nums.length] = nums[i]
     }
+    console.log(arr);
     for (let j = 0; j < nums.length; j++) {
         nums[j] = arr[j]
     }
+    console.log(nums);
 
 };
 
 const nums: number[] = [1, 2, 3, 4, 5, 6, 7]
 const k: number = 3
-console.log(rotate(nums, k));
+rotate(nums, k)
 
-// 第二种直接有现有的数组
+/**
+ * 第二种直接用现有的数组，先将整个数组翻转，然后将目标值前面翻转，最后将目标值后面翻转
+ * @param nums 
+ * @param k 
+ */
+const rotate1 = (nums: number[], k: number): void => {
+    // 翻转函数
+    function reverse(nums: number[], start: number, end: number) {
+        while (start < end) {
+            const temp = nums[start]
+            nums[start] = nums[end]
+            nums[end] = temp
+            start++
+            end--
+        }
+    }
+    // 获取中间值
+    k = k % nums.length
+    console.log(k);
+    // 翻转整个数组
+    reverse(nums, 0, nums.length - 1)
+    console.log(nums);
+    // 翻转中间值前面的数据
+    reverse(nums, 0, k - 1)
+    console.log(nums);
+    // 翻转中间值后面的数据
+    reverse(nums, k, nums.length - 1)
+    console.log(nums);
+};
+rotate1(nums, k)
+
+
+export { }

@@ -6,7 +6,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, getCurrentInstance } from "vue";
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  getCurrentInstance,
+  onMounted,
+} from "vue";
 import ArticleList from "./components/main.vue";
 // import emitter from "../../utils/mitt";
 

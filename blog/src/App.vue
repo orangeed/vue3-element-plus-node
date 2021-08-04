@@ -3,7 +3,7 @@
 </template>
 
 <script lang='ts'>
-import { computed, onMounted, watch } from "vue";
+import { computed, onMounted, watch, ref } from "vue";
 import { useStore } from "vuex";
 import { debounce } from "./utils/index";
 
@@ -31,9 +31,7 @@ export default {
         store.dispatch("app/isPhone", false);
       }
     };
-    // return {
-    //   changeClientWidth,
-    // };
+    return {};
   },
 };
 </script>

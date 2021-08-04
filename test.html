@@ -41,6 +41,7 @@
         }
     })
     document.addEventListener('keyup', e => {
+        console.log(e);
         obj.name = e.target.value
     })
     // var a, b;
@@ -59,6 +60,21 @@
         console.log(msg);
     }
     console.log('msg', msg);
+
+    function getQueryString(url) {
+        var url = window.location //获取url中"?"符后的字串
+        console.log(url);
+        let href = url.href
+        href.split('vue')
+        console.log(href);
+        // if (url.indexOf("?") != -1) {
+        //     var str = url.substr(1);
+        //     strs = str.split("=");
+        //     console.log(strs[1]);
+        // }
+        // return null;
+    }
+    console.log(getQueryString('http://localhost:8080/#/?code=alYcatYNwWTvM7XN1CI79cVaXgYwCL1Vr3QPatPmGkc'));
 </script>
 
 </html>
