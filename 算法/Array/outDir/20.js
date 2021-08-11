@@ -10,6 +10,7 @@ var __values = (this && this.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var firstUniqChar = function (s) {
     var e_1, _a;
     var map = {};
@@ -26,9 +27,12 @@ var firstUniqChar = function (s) {
         }
         finally { if (e_1) throw e_1.error; }
     }
-    for (var i = 0; i < s.length; i++)
-        if (map[s[i]] === 1)
+    for (var i = 0; i < s.length; i++) {
+        if (map[s[i]] === 1) {
             return i;
+        }
+    }
+    ;
     return -1;
 };
 var s = "loveleetcode";

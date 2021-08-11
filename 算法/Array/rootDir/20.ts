@@ -7,10 +7,15 @@
  * 返回 2
  */
 
+
 interface obj {
     [propname: string]: number,
 }
-
+/**
+ * 计数，每出现一次，计数为1次，当计数为1的时候返回索引值，否则返回-1
+ * @param s 
+ * @returns 
+ */
 const firstUniqChar = (s: string): number => {
     let map: obj = {};
     for (let v of s) {
@@ -27,3 +32,4 @@ const firstUniqChar = (s: string): number => {
 const s: string = "loveleetcode"
 // firstUniqChar(s)
 console.log(firstUniqChar(s));
+export { }
