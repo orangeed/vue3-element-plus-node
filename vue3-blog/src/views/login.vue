@@ -49,6 +49,7 @@ export default {
 
     // 登录
     const onLogin = async () => {
+      console.log('contextInfo',contextInfo);
       const loginInfo = await login({
         username: contextInfo.userName,
         password: MD5(contextInfo.passWord),

@@ -1,0 +1,33 @@
+/* 布局 */
+.page-main{
+    height: 100vh;
+    width: 100vw;
+}
+
+// 边距
+.ma-10{
+    margin: 10px;
+}
+
+// 左右布局
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left{
+    // position: absolute;
+    // left: 10%;
+    margin-left: -30%;
+}
+.right{
+    margin-right: -30%;
+}
+
+// 弹性盒子
+.flex-row{
+    flex-direction: row;
+}
+.flex-col{
+    flex-direction: column;
+}
