@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<script class="jquery library" src="/js/sandbox/jquery/jquery-1.8.2.min.js" type="text/javascript"></script>-->
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <title>
+        RunJS 演示代码
+    </title>
+    <style>
+        /*设置所有的厚度和元素间为0*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*设置页面背景颜色*/
+        body {
+            background-color: #af4040;
+        }
+
+        /*设置所有div绝对定位且左浮动，高度为500px*/
+        div {
+            position: absolute;
+            float: left;
+            height: 500px;
+        }
+
+        /*设置左边div背景颜色、宽度为200px、左边距离窗口为0*/
+        div.left {
+            background-color: #B2B2B2;
+            width: 200px;
+            left: 0px;
+        }
+
+        /*设置右边div背景颜色、宽度200px、右边距离窗口为205px、右浮动*/
+        div.right {
+            background-color: #00B83F;
+            width: 200px;
+            right: 205px;
+            float: right;
+        }
+
+        /*设置中间div宽度5px、鼠标为左右两个箭头、背景颜色、元素的堆叠顺序为[后来者居上的准则]、左边距离窗口200px*/
+        div.center {
+            width: 5px;
+            cursor: col-resize;
+            background-color: #FFB951;
+            z-index: 1;
+            left: 200px;
+        }
+    </style>
+    <script>
+        $(function () {
+            // 分别是：当前窗口、左边div、中间div、右边div
+            var doc = $(document), dl = $("div.left"), dc = $("div.center"), dr = $("div.right");
+            // 三个div宽度的总和
+            var sum = dl.width() + dr.width() + dc.width();
+            // 中间div拖动鼠标事件
+            dc.mousedown(function (e) {
+                // 把当前中间div的dom对象转为jquery对象
+                // var me = $(this);
+                // e.clientX当前鼠标的x轴长度，me.css("left")中间div距离左边长度，me.prop("clientLeft")中间div距离左边div长度
+                var deltaX = e.clientX - (parseFloat(dc.css("left")) || parseFloat(dc.prop("border-left")));
+                // deltaX表示记录鼠标点击时，距离中间div左边的距离，取值范围不会超过中间div的宽度
+                // 鼠标移动事件
+                doc.mousemove(function (e) {
+                    // lt表示鼠标移动时，中间div左边距离左边窗口的长度
+                    var lt = e.clientX - deltaX;
+                    // 这里表示，当中间div左边距离左边窗口的长度小于等于0时就等于0，就是保证不小于0
+                    lt = lt < 0 ? 0 : lt;
+                    // 这里表示，当中间div左边距离左边窗口的长度大于左边div加中间div长度时就等于左边div加中间div长度，就是保证不大于左边div加中间div的长度
+                    lt = lt > sum - dc.width() ? sum - dc.width() : lt;
+                    // 设置中间div左边的宽度，也就是等于当前鼠标的x轴
+                    dc.css("left", lt + "px");
+                    // 设置左边div的宽度
+                    dl.width(lt);
+                    // 设置右边div的宽度
+                    dr.width(sum - lt - dc.width());
+                });
+            });
+
+            // 鼠标松开后删除鼠标移动事件
+            doc.mouseup(function () {
+                doc.unbind("mousemove");
+            });
+
+            // 当鼠标点击移动开始不选中div里的内容
+            doc[0].onselectstart = function () {
+                return false;
+            };
+        });
+    </script>
+</head>
+<body>
+<div class="left">
+    这是左边的div
+</div>
+<div class="center">
+    这是中间的div
+</div>
+<div class="right">
+    这是右边的div
+</div>
+</body>
+</html>

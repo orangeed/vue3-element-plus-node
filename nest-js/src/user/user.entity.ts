@@ -31,19 +31,19 @@ export class UserEntity {
   name: string
 
   // 性别
-  @Column()
+  @Column({ nullable: true })
   sex: string
 
   // 生日
-  @Column()
+  @Column({ nullable: true })
   birthday: string
 
   // 联系方式
-  @Column()
+  @Column({ nullable: true })
   phone: string
 
   // 身份证号码
-  @Column()
+  @Column({ nullable: true })
   cardID: string
 
   @BeforeInsert()

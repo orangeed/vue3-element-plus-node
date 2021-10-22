@@ -17,15 +17,15 @@ export class ArticleEntity {
     id: number
 
     // 文章title
-    @Column()
+    @Column({ nullable: true })
     title: string
 
     // 文章作者
-    @Column()
+    @Column({ nullable: true })
     author: string
 
     // 文章简介
-    @Column()
+    @Column({ nullable: true })
     description: string
 
     // markdown 文章内容
@@ -33,7 +33,7 @@ export class ArticleEntity {
     content: string
 
     // 发布时间
-    @Column()
+    @Column({ nullable: true })
     createTime: string
 
     // 修改时间
@@ -41,6 +41,6 @@ export class ArticleEntity {
     changeTime: string
 
     // 文章状态
-    @Column()
+    @Column({ nullable: true })
     state: number
 }
