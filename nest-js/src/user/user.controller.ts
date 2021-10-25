@@ -33,8 +33,34 @@ export class UserController {
     async getUserInfo() {
         const loginUserName = this.loginUserName
         const _userInfo = await this.userService.getUserInfo(loginUserName)
+        console.log("userInfo", _userInfo);
+        let returnData = {
+            realName: 'Admin',
+            permissions: [
+                {
+                    label: '主控台',
+                    value: 'dashboard_console',
+                },
+                {
+                    label: '监控页',
+                    value: 'dashboard_monitor',
+                },
+                {
+                    label: '工作台',
+                    value: 'dashboard_workplace',
+                },
+                {
+                    label: '基础列表',
+                    value: 'basic_list',
+                },
+                {
+                    label: '基础列表删除',
+                    value: 'basic_list_delete',
+                }],
+            ..._userInfo
+        }
         if (!_userInfo) return this.MSG.fail(userInfoErr)
-        return this.MSG.pass(success, _userInfo)
+        return this.MSG.pass(success, returnData)
     }
     @Delete('/logout')
     @ApiOperation({ summary: '用户退出登录' })

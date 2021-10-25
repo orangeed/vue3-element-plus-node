@@ -15,6 +15,6 @@ export class MsgService {
     }
     public pass(msg: any, dat: any) {
         console.log(dat);
-        return { data: dat, message: msg.message, errorCode: msg.errorCode };
+        return { result: dat, message: msg.message, code: msg.code };
     }
 }
