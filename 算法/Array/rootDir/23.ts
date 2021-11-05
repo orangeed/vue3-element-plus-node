@@ -112,3 +112,4 @@ const myAtoi = (s: string): number => {
 };
 const s: string = "-2147483648"
 console.log(myAtoi(s));
+export { }

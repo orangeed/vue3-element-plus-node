@@ -1,6 +1,7 @@
 <!-- 导航栏 -->
 <template>
   <div id="nav" class="center flex-col">
+    
     <!-- 上方图片 -->
     <div class="left">
       <svg

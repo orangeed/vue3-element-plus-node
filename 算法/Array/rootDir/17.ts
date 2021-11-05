@@ -87,4 +87,5 @@ const board: string[][] = [["5", "3", ".", ".", "7", ".", ".", ".", "."]
     , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
 console.log(isValidSudoku(board));
+export{}
 

@@ -15,13 +15,18 @@ var __read = (this && this.__read) || function (o, n) {
     }
     return ar;
 };
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var isAnagram = function (s, t) {
-    return s.length === t.length && __spread(s).sort().join('') === __spread(t).sort().join('');
+    return s.length === t.length && __spreadArray([], __read(s), false).sort().join('') === __spreadArray([], __read(t), false).sort().join('');
 };
 var s = "anagram", t = "nagaram";
 console.log(isAnagram(s, t));

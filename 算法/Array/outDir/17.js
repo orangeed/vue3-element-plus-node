@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var isValidSudoku = function (board) {
     var rows = [], columns = [], boxs = [];
     for (var i = 0; i < 9; i++) {

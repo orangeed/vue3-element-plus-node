@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var twoSum = function (nums, target) {
     var n = nums.length;
     if (n === 0)

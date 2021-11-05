@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var strStr = function (haystack, needle) {
     return haystack.indexOf(needle);
 };
@@ -13,4 +14,5 @@ var strStr1 = function (haystack, needle) {
     return -1;
 };
 var haystack = "hello", needle = "ll";
+console.log(strStr(haystack, needle));
 console.log(strStr1(haystack, needle));

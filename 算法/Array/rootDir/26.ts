@@ -32,3 +32,4 @@ const strs: string[] = ["dog","racecar","car"]
 
 
 console.log(longestCommonPrefix(strs));
+export {}

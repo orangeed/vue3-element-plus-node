@@ -32,3 +32,4 @@ const nums: Array<number> = [3, 3]
 
 const target: number = 6
 console.log(twoSum(nums, target));
+export { }

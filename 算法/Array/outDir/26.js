@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var longestCommonPrefix = function (strs) {
     if (strs.length === 0)
         return '';

@@ -13,19 +13,21 @@
 解释：给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.
  */
 
-class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.next = (next === undefined ? null : next)
-    }
-}
+// class ListNode {
+//     val: number
+//     next: ListNode | null
+//     constructor(val?: number, next?: ListNode | null) {
+//         this.val = (val === undefined ? 0 : val)
+//         this.next = (next === undefined ? null : next)
+//     }
+// }
 
 
-const deleteNode = (root: ListNode | null): void => {
+// const deleteNode = (root: ListNode | null): void => {
 
-};
+// };
 
-const root: ListNode = [4, 5, 1, 9]
-const node: number = 5
+// const root: ListNode = [4, 5, 1, 9]
+// const node: number = 5
+
+export { }

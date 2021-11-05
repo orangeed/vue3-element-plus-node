@@ -24,7 +24,6 @@
 const strStr = (haystack: string, needle: string): number => {
     return haystack.indexOf(needle)
 };
-
 /**
  * 滑动窗口
  * @param haystack 
@@ -44,5 +43,6 @@ const strStr1 = (haystack: string, needle: string): number => {
 
 const haystack: string = "hello", needle: string = "ll"
 
-// console.log(strStr(haystack, needle));
+console.log(strStr(haystack, needle));
 console.log(strStr1(haystack, needle));
+export { }
