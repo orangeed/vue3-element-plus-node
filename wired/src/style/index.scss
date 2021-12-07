@@ -1,3 +1,17 @@
 @import './color.scss';
 @import './grid.scss';
 @import './font.scss';
+
+@media screen and (max-width: 767px) {
+
+    @import './phone/index.scss';
+
+}
+
+@media screen and (min-width: 768px) and (max-width:1023px) {
+    @import './pad/index.scss';
+}
+
+@media screen and (min-width: 1024px) {
+    @import './pc/index.scss';
+}

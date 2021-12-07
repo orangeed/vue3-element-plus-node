@@ -1,7 +1,6 @@
 <!-- 导航栏 -->
 <template>
   <div id="nav" class="center flex-col">
-    
     <!-- 上方图片 -->
     <div class="left">
       <svg
@@ -153,14 +152,36 @@
     </div>
     <!-- 中间导航 -->
     <div class="center">
-      <wired-button
-        elevation="3"
-        class="title ma-10"
+      <!-- <button
+        for="modal-1"
+        class="lined thick title ma-10"
         v-for="(item, index) in meauList"
         :key="index"
         @click="handleClickMeau(item.value)"
-        >{{ item.name }}</wired-button
       >
+        {{ item.name }}
+      </button> -->
+      <div v-for="(item, index) in meauList" :key="index">
+        <div @click="handleClickMeau(item.value)">
+          <label class="ma-10 paper-btn title margin" :for="`modal-${index}`">
+            {{ item.name }}</label
+          >
+        </div>
+        <input class="modal-state" :id="`modal-${index}`" type="checkbox" />
+        <!-- 弹出框 -->
+        <div class="modal">
+          <label class="modal-bg" :for="`modal-${index}`"></label>
+          <div class="modal-body">
+            <label class="btn-close" :for="`modal-${index}`">X</label>
+            <h4 class="modal-title">Modal Title</h4>
+            <h5 class="modal-subtitle">Modal Subtitle</h5>
+            <p class="modal-text">
+              This is an example of modal which is implemented with pure CSS! :D
+            </p>
+            <label for="modal-1">Nice!</label>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- 底部图片 -->
     <div class="right">
@@ -191,15 +212,6 @@
         ></path>
       </svg>
     </div>
-    <!-- 弹出框 -->
-    <div v-show="showDialog">
-      <wired-dialog>
-        <p>Dialog content here</p>
-        <div style="text-align: right; padding: 30px 16px 16px">
-          <wired-button>Close dialog</wired-button>
-        </div>
-      </wired-dialog>
-    </div>
   </div>
 </template>
 
@@ -211,7 +223,7 @@ export default defineComponent({
   name: "navigation",
   components: {},
   setup() {
-    const data = reactive({
+    const indexData = reactive({
       meauList: [
         {
           name: "文章",
@@ -228,15 +240,16 @@ export default defineComponent({
       ],
       selected: "",
       //   弹出框
-        showDialog: false,
+      showDialog: false,
     });
 
     // 点击按钮
     const handleClickMeau = (val) => {
-      data.showDialog = true;
+      console.log("val", val);
+      indexData.showDialog = true;
     };
     return {
-      ...toRefs(data),
+      ...toRefs(indexData),
       handleClickMeau,
     };
   },
@@ -248,13 +261,9 @@ export default defineComponent({
   position: relative;
   height: 100vh;
   .icon {
-    vertical-align: -0.15em;
+    vertical-align: -0.15rem;
     fill: currentColor;
     overflow: hidden;
-  }
-  .juzi {
-    font-size: 100px;
-    // color: rgba(255, 165, 0, 0.5);
   }
 }
 </style>
