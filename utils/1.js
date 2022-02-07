@@ -213,3 +213,138 @@
 
 // console.log(myHex);
 
+// const arr = [1, 2, 3, 4, 5, 6, 6, 6, 6]
+
+// const obj = {
+//     a: '1',
+//     b: '2'
+// }
+
+// const {
+//     a,
+//     b
+// } = obj
+// console.log(a, b);
+
+// const c = {
+//     c: '3',
+//     ...obj
+// }
+
+// console.log(c);
+
+// console.log(arr);
+// console.log(...arr);
+// console.log(...new Set(arr));
+// console.log(Math.max(...arr));
+
+// class EventBus {
+//     constructor() {
+//         this.eventContainer = this.eventContainer || new Map() //用一个容器存放事件
+//     }
+//     on(type, callback) {
+//         if (!this.eventContainer.has(type)) {
+//             //如果容器里面没有这种类型的事件，就增加
+//             this.eventContainer.set(type, callback)
+
+//         }
+//     }
+//     off(type) {
+//         if (this.eventContainer.has(type)) {
+
+//             this.eventContainer.delete(type)
+
+//         }
+//     }
+//     emit(type) {
+//         let fn = this.eventContainer.get(type)
+//         fn.apply(this, [...arguments].slice(1))
+//     }
+// }
+
+
+class EventBus {
+    constructor() {
+        // 创建事件队列，因为可能会存在很多的eventbus，所以使用对象的形式，键为名，值为函数。
+        this.tasks = {}
+    }
+    /**
+     * 订阅事件
+     * @param {String} type 事件名称
+     * @param {Function} fn 回调函数
+     */
+    on(type, fn) {
+        // 如果事件队列中不包含传入的type类型，则需要创建一个。
+        if (!this.tasks[type]) {
+            this.tasks[type] = []
+        }
+        // 如果事件队列中存在，则将回调函数加入队列
+        this.tasks[type].push(fn)
+    }
+    /**
+     * 订阅一次的事件
+     * @param {String} type 
+     * @param {Function} fn 
+     */
+    once(type, fn) {
+        // 如果事件队列中不包含传入的type类型，则需要创建一个。
+        if (!this.tasks[type]) {
+            this.tasks[type] = []
+        }
+        const _this = this
+        // 只执行一次，然后注销移除回调
+        const _once = (...args) => {
+            fn(...args)
+            _this.off(type, _once)
+        }
+        this.tasks[type].push(_once)
+    }
+    /**
+     * 发布事件
+     * @param {String} type 事件名称
+     * @param  {...any} args 传入的参数
+     * @returns 
+     */
+    emit(type, ...args) {
+        console.log('args', args);
+        // 如果队列中不存在传入的type时候，则不执行任何操作
+        if (!this.tasks[type]) {
+            return
+        }
+        // 如果队列中含有传入的type时，遍历队列中的函数，并传入参数
+        this.tasks[type].forEach(fn => fn(...args));
+    }
+    /**
+     * 取消订阅
+     * @param {String} type 事件名称
+     * @param {Function} fn 回调函数
+     * @returns 
+     */
+    off(type, fn) {
+        const tasks = this.tasks[type]
+        console.log('tasks', this.tasks[type]);
+        // 如果队列中不存在传入的type时候，则不执行任何操作
+        if (!Array.isArray(tasks)) {
+            return
+        }
+        // 利用 filter 删除队列中的指定函数
+        this.tasks[type] = tasks.filter(cb => fn !== cb)
+        console.log('off', this.tasks[type]);
+    }
+}
+
+let eventBus = new EventBus()
+eventBus.on('testEvent', data => {
+    setTimeout(() => {
+        console.log('This is a', data.name)
+    }, 1000)
+})
+eventBus.emit('testEvent', {
+    name: 'orange'
+})
+
+setTimeout(() => {
+    eventBus.off('testEvent', (e) => {
+        console.log('事件已经移除', e);
+    })
+}, 3000);

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据双向绑定</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <span id="output"></span>
+</body>
+<script>
+    // 定义一个数据对象
+    const userInfo = {}
+    // 获取输入框
+    const input = document.getElementById('input')
+    // 当输入框输入的时候赋值，更新视图到数据上
+    input.oninput = () => {
+        userInfo.name = input.value
+    }
+    // 获取输出的dom
+    const output = document.getElementById('output')
+    // 更新数据到视图
+    Object.defineProperty(userInfo, 'name', {
+        get: () => {
+            console.log('get', userInfo);
+        },
+        set: (val) => {
+            output.innerHTML = val
+            input.value = val
+            console.log('set', val);
+        }
+    })
+</script>
+
+</html>
