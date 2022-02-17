@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <input id="input" oninput='changeText()' style="width: 200px;padding: 2px;font-size: 12px;min-width: 200px;" />
+</body>
+
+<script>
+    /**
+     * 未超过不处理，当字符串长度大于输入框长度的的时候
+     * 获取字符串长度
+     * 获取输入框长度
+     * 判断输入的文本是否是中文，
+     * 计算中文以及其他单个文本的长度计算输入框的长度
+     */
+    const changeText = () => {
+        const input = document.getElementById('input')
+        // 获取输入文本
+        const nowStr = input.value
+        // 获取输入文本汉字
+        const chineseText = nowStr.replace(/[^\u4e00-\u9fa5]/gi, "")
+        console.log('chineseText', chineseText);
+        // 获取输入字符串的字体大小
+        const fontSize = input.style.fontSize.split('px')[0]
+        console.log('fontSize', fontSize);
+        const chineseTextWidth = Number(chineseText.length) * Number(fontSize)
+        console.log('chineseTextWidth', chineseTextWidth);
+        // 获取英文
+        const enText = nowStr.replace(/[^a-z]+/ig, "");
+        console.log('enText', enText);
+        const enTextWidth = Number(enText.length) * (Number(fontSize) / 2)
+        // 获取数字
+        const numText = nowStr.replace(/[^0-9]/ig, "")
+        console.log('numText', numText);
+        const numTextWidth = Number(numText.length) * (Number(fontSize) / 2)
+        // 增加宽度
+        const addWidth = chineseTextWidth + enTextWidth + numTextWidth
+        console.log('addWidth', addWidth, );
+        // if (oldWidth <= 200) return
+        input.style.width = addWidth + 'px'
+        // 获取屏幕的宽度
+        const screenWdith = document.body.width
+        console.log(screenWdith);
+        input.style.maxWidth = '600px'
+
+    }
+    // changeText()
+</script>
+
+</html>

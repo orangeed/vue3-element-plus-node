@@ -301,7 +301,7 @@ class EventBus {
     }
     /**
      * 发布事件
-     * @param {String} type 事件名称
+     * @param {String} type 事件
      * @param  {...any} args 传入的参数
      * @returns 
      */
