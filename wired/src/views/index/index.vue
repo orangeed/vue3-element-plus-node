@@ -9,12 +9,15 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import navigation from "./components/nav.vue";
+import { useCreate } from "./1";
 interface dataProps {}
 export default defineComponent({
   name: "",
   components: { navigation },
   setup() {
     const data = reactive({});
+    const { clgFn } = useCreate();
+    console.log('clgFn',clgFn);
     return {
       data,
     };
