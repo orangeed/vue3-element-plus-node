@@ -1,6 +1,9 @@
 <!-- 导航栏 -->
 <template>
-  <div id="nav" class="center flex-col">
+  <div
+    id="nav"
+    class="center flex-col"
+  >
     <!-- 上方图片 -->
     <div class="left">
       <svg
@@ -161,18 +164,33 @@
       >
         {{ item.name }}
       </button> -->
-      <div v-for="(item, index) in meauList" :key="index">
-        <div @click="handleClickMeau(item.value)">
-          <label class="ma-10 paper-btn title margin" :for="`modal-${index}`">
-            {{ item.name }}</label
+      <div
+        v-for="(item, index) in meauList"
+        :key="index"
+      >
+        <div @click="handleClickMeau">
+          <label
+            class="ma-10 paper-btn title margin"
+            :for="`modal-${index}`"
           >
+            {{ item.name }}</label>
         </div>
-        <input class="modal-state" :id="`modal-${index}`" type="checkbox" />
+        <input
+          class="modal-state"
+          :id="`modal-${index}`"
+          type="checkbox"
+        />
         <!-- 弹出框 -->
         <div class="modal">
-          <label class="modal-bg" :for="`modal-${index}`"></label>
+          <label
+            class="modal-bg"
+            :for="`modal-${index}`"
+          ></label>
           <div class="modal-body">
-            <label class="btn-close" :for="`modal-${index}`">X</label>
+            <label
+              class="btn-close"
+              :for="`modal-${index}`"
+            >X</label>
             <h4 class="modal-title">Modal Title</h4>
             <h5 class="modal-subtitle">Modal Subtitle</h5>
             <p class="modal-text">
@@ -244,8 +262,7 @@ export default defineComponent({
     });
 
     // 点击按钮
-    const handleClickMeau = (val) => {
-      console.log("val", val);
+    const handleClickMeau = () => {
       indexData.showDialog = true;
     };
     return {
